@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [18/Jan/2020:16:08:03 -0200] "POST /pizzaria/user HTTP/1.1" 200 77 http-bio-9090-exec-2 532
+0:0:0:0:0:0:0:1 - - [18/Jan/2020:16:08:14 -0200] "GET /pizzaria/login HTTP/1.1" 200 - http-bio-9090-exec-3 432
+0:0:0:0:0:0:0:1 - - [18/Jan/2020:16:08:30 -0200] "GET /pizzaria/flavor HTTP/1.1" 200 773 http-bio-9090-exec-4 42
+0:0:0:0:0:0:0:1 - - [18/Jan/2020:17:17:33 -0200] "GET /pizzaria/flavor HTTP/1.1" 200 773 http-bio-9090-exec-2 541
+127.0.0.1 - - [18/Jan/2020:17:28:51 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 773 http-bio-9090-exec-1 2504
+127.0.0.1 - - [18/Jan/2020:17:30:12 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 773 http-bio-9090-exec-1 480
