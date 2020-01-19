@@ -14,6 +14,7 @@ E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\dao\
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\dao\SystemUserDao.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\service\FlavorService.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\config\SpringJpaConfig.java
+E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\Type.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\resource\rest\FlavorRestController.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\service\FlavorServiceImpl.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\config\WebSecurityConfig.java

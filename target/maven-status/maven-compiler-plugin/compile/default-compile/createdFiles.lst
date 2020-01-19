@@ -19,5 +19,6 @@ br\com\pizzaria\service\SystemUserService.class
 br\com\pizzaria\domain\Ingredient.class
 br\com\pizzaria\config\WebSecurityConfig.class
 br\com\pizzaria\dao\FlavorDao.class
+br\com\pizzaria\domain\Type.class
 br\com\pizzaria\service\SystemUserServiceImpl.class
 br\com\pizzaria\config\SpringJpaConfig.class

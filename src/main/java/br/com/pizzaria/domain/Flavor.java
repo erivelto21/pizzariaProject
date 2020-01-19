@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +30,10 @@ public class Flavor {
 	
 	@Column(nullable = false)
 	private String image;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Type type;
 	
 	@ManyToMany(fetch = FetchType.EAGER)//ver isso aqui do eager 
 	@JoinTable(name="ingredient_flavor",
@@ -73,5 +79,13 @@ public class Flavor {
 
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
 	}
 }
