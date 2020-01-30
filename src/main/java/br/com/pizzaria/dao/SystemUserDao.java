@@ -6,5 +6,7 @@ public interface SystemUserDao {
 	
 	SystemUser getSystemUser(SystemUser user);
 	
-	SystemUser getSystemUser(String username);
+	SystemUser getSystemUser(String email);
+	
+	SystemUser save(SystemUser user);
 }

@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.pizzaria.domain.Role;
 import br.com.pizzaria.domain.SystemUser;
 
 @Service("userDetailsService")
@@ -24,13 +23,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	private SystemUserService service;
 	
 	@Transactional(readOnly = true)
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		SystemUser user = service.getSystemUser(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		SystemUser user = service.getSystemUser(email);
 		UserDetails userDetails = null;
 		
 		if(user != null) {
 			List<GrantedAuthority> grantedAuthorityList = getGrantedAuthorityList(user);
-			userDetails = new User(user.getUsername(),
+			userDetails = new User(user.getFirstName(),
 					new BCryptPasswordEncoder().encode(user.getPassword()),
 					grantedAuthorityList);
 		}
@@ -41,9 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	private List<GrantedAuthority> getGrantedAuthorityList(SystemUser user){
 		List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
 		
-		for(Role role: user.getRoles()) {
-			grantedAuthorityList.add(new SimpleGrantedAuthority(role.getName()));
-		}
+		grantedAuthorityList.add(new SimpleGrantedAuthority(user.getRole().getName()));
 		
 		return grantedAuthorityList;
 	}

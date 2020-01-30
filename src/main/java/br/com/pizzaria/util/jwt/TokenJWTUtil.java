@@ -9,14 +9,14 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class TokenJWTUtil {
 	
-	static final long EXPIRATION_TIME = 86000000;// quase 1 dia
+	static final long EXPIRATION_TIME = 86000000;// almost one day
 	
 	public static String gerarTokenJWT(String username, List<String> roles) {
 		return Jwts.builder()
 				.signWith(SignatureAlgorithm.HS256, KeyGeneratorUtil.generateKey())
 				.setHeaderParam("typ","JWT")
                 .setSubject(username)
-                .setIssuer("pizzaria")//trocar dps
+                .setIssuer("pizzaria")//change later
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .claim("roles", roles)

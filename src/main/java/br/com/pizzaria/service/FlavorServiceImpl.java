@@ -16,6 +16,7 @@ public class FlavorServiceImpl implements FlavorService{
 	@Autowired
 	private FlavorDao dao;
 	
+	@Transactional(readOnly = true)
 	public List<Flavor> getAllFlavorsList() {
 		return dao.getAllFlavors();
 	}

@@ -22,6 +22,11 @@ public class UserRestController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public SystemUser getUser(@RequestBody SystemUser user) {
-		return service.getSystemUser(user);
+		return this.service.getSystemUser(user);
+	}
+
+	@PostMapping("/save")
+	public SystemUser save(@RequestBody SystemUser user) throws Exception {
+		return this.service.save(user);
 	}
 }
