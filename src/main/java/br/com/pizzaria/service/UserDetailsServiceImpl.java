@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 		
 		if(user != null) {
 			List<GrantedAuthority> grantedAuthorityList = getGrantedAuthorityList(user);
-			userDetails = new User(user.getFirstName(),
+			userDetails = new User(user.getEmail(),
 					new BCryptPasswordEncoder().encode(user.getPassword()),
 					grantedAuthorityList);
 		}
