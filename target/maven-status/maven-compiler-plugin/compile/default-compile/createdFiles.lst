@@ -22,6 +22,7 @@ br\com\pizzaria\domain\Flavor.class
 br\com\pizzaria\service\UserDetailsServiceImpl.class
 br\com\pizzaria\service\FlavorService.class
 br\com\pizzaria\dao\SystemUserDao.class
+br\com\pizzaria\domain\Address.class
 br\com\pizzaria\config\SpringRootConfig.class
 br\com\pizzaria\domain\SystemUser.class
 br\com\pizzaria\config\WebSecurityConfig.class

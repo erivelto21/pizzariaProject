@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -56,6 +57,10 @@ public class SystemUser {
     @JoinColumn(name="role")
 	private Role role;
 
+	@OneToOne
+	@JoinColumn(name="address")
+	private Address address;
+	
 	public long getId() {
 		return id;
 	}
@@ -102,5 +107,13 @@ public class SystemUser {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 }
