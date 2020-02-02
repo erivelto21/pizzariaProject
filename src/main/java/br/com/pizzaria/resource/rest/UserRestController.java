@@ -3,6 +3,7 @@ package br.com.pizzaria.resource.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +18,13 @@ public class UserRestController {
 	@Autowired
 	private SystemUserService service;
 	
-	@PostMapping()
+	@PostMapping
 	public SystemUser save(@RequestBody SystemUser user) throws Exception {
 		return this.service.save(user);
+	}
+	
+	@PutMapping
+	public SystemUser updateAddress(@RequestBody SystemUser user) {
+		return this.service.updateAddress(user);
 	}
 }

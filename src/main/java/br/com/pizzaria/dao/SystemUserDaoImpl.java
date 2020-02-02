@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.pizzaria.domain.Address;
 import br.com.pizzaria.domain.SystemUser;
 
 @Repository
@@ -31,5 +32,18 @@ public class SystemUserDaoImpl implements SystemUserDao{
 	public SystemUser save(SystemUser user) {
 		this.entityManager.persist(user);
 		return user;
+	}
+	
+	public void updateSystemUser(SystemUser user) {
+		this.entityManager.merge(user);
+	}
+
+	public long saveAddress(Address address) {
+		this.entityManager.persist(address);
+		return address.getId();
+	}
+	
+	public void updateAddress(Address address) {
+		this.entityManager.merge(address);
 	}
 }

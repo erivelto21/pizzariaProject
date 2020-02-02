@@ -46,4 +46,15 @@ public class SystemUserServiceImpl implements SystemUserService{
 		else
 			throw new EmailExistException("Email já em uso");
 	}
+	
+	public SystemUser updateAddress(SystemUser user) {
+		if(user.getAddress().getId() == 0) {
+			user.getAddress().setId(this.dao.saveAddress(user.getAddress()));
+			this.dao.updateSystemUser(user);
+		} else {
+			this.dao.updateAddress(user.getAddress());
+		}
+		
+		return user;
+	}
 }

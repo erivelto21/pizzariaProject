@@ -9,4 +9,6 @@ public interface SystemUserService {
 	SystemUser getSystemUser(String email);
 	
 	SystemUser save(SystemUser user) throws Exception;
+	
+	SystemUser updateAddress(SystemUser user);
 }
