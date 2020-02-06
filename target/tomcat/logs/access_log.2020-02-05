@@ -1,0 +1,13 @@
+127.0.0.1 - - [05/Feb/2020:17:11:13 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-1 520
+127.0.0.1 - - [05/Feb/2020:17:11:21 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-2 64
+127.0.0.1 - - [05/Feb/2020:17:11:44 -0200] "POST /pizzaria/login HTTP/1.1" 200 259 http-bio-9090-exec-4 485
+127.0.0.1 - - [05/Feb/2020:17:11:44 -0200] "POST /pizzaria/login HTTP/1.1" 200 259 http-bio-9090-exec-3 485
+127.0.0.1 - - [05/Feb/2020:17:11:44 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-5 54
+127.0.0.1 - - [05/Feb/2020:17:14:56 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-6 58
+127.0.0.1 - - [05/Feb/2020:17:17:11 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-7 63
+127.0.0.1 - - [05/Feb/2020:18:03:22 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-8 69
+127.0.0.1 - - [05/Feb/2020:18:03:52 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-9 59
+127.0.0.1 - - [05/Feb/2020:18:04:08 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-10 53
+127.0.0.1 - - [05/Feb/2020:20:27:23 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-1 84
+127.0.0.1 - - [05/Feb/2020:20:27:32 -0200] "PUT /pizzaria/user/ HTTP/1.1" 200 271 http-bio-9090-exec-2 1813
+127.0.0.1 - - [05/Feb/2020:20:27:33 -0200] "GET /pizzaria/flavor/ HTTP/1.1" 200 4675 http-bio-9090-exec-4 63

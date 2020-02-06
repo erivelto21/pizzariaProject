@@ -13,7 +13,11 @@ public interface SystemUserDao {
 	
 	void updateSystemUser(SystemUser user);
 	
+	Address get(long id);
+	
 	long saveAddress(Address address);
 	
 	void updateAddress(Address address);
+	
+	String getPhone(long id);
 }

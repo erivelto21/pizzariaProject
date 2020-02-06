@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.pizzaria.dao.SystemUserDao;
+import br.com.pizzaria.domain.Address;
 import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.exception.EmailExistException;
 import br.com.pizzaria.exception.SystemUserInvalidException;
@@ -52,9 +53,20 @@ public class SystemUserServiceImpl implements SystemUserService{
 			user.getAddress().setId(this.dao.saveAddress(user.getAddress()));
 			this.dao.updateSystemUser(user);
 		} else {
-			this.dao.updateAddress(user.getAddress());
+			if(!phoneIsEqual(user))
+				this.dao.updateSystemUser(user);
+			if(!addressIsEqual(user.getAddress()))
+				this.dao.updateAddress(user.getAddress());
 		}
 		
 		return user;
+	}
+	
+	private boolean phoneIsEqual(SystemUser user) {
+		return user.getPhone().equals(this.dao.getPhone(user.getId()));
+	}
+	
+	private boolean addressIsEqual(Address address) {
+		return address.toString().equals(this.dao.get(address.getId()).toString());
 	}
 }

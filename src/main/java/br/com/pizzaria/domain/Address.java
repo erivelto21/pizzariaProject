@@ -97,4 +97,10 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", street=" + street + ", number=" + number + ", complement=" + complement
+				+ ", neighborhood=" + neighborhood + ", cep=" + cep + ", city=" + city + ", state=" + state + "]";
+	}
 }

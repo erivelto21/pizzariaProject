@@ -61,6 +61,8 @@ public class SystemUser {
 	@JoinColumn(name="address")
 	private Address address;
 	
+	private String phone;
+
 	public long getId() {
 		return id;
 	}
@@ -115,5 +117,13 @@ public class SystemUser {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

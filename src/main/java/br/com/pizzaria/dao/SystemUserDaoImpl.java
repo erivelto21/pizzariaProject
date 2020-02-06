@@ -38,6 +38,13 @@ public class SystemUserDaoImpl implements SystemUserDao{
 		this.entityManager.merge(user);
 	}
 
+	public Address get(long id) {
+		return this.entityManager
+				.createQuery("select a from Address a where a.id = :id", Address.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
+	
 	public long saveAddress(Address address) {
 		this.entityManager.persist(address);
 		return address.getId();
@@ -45,5 +52,12 @@ public class SystemUserDaoImpl implements SystemUserDao{
 	
 	public void updateAddress(Address address) {
 		this.entityManager.merge(address);
+	}
+	
+	public String getPhone(long id) {
+		return this.entityManager
+				.createQuery("select u.phone from SystemUser u where u.id = :id", String.class)
+				.setParameter("id", id)
+				.getSingleResult();
 	}
 }
