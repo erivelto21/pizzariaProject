@@ -1,5 +1,6 @@
 package br.com.pizzaria.domain;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,6 +29,9 @@ public class Order {
 	
 	@Column(name="transaction_status", nullable = false)
 	private String transactionStatus;
+	
+	@Column(nullable = false)
+	private BigDecimal total;
 	
 	@ManyToOne
 	@JoinColumn(name = "user")
@@ -59,6 +63,14 @@ public class Order {
 
 	public void setTransactionStatus(String transactionStatus) {
 		this.transactionStatus = transactionStatus;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
 	public SystemUser getUser() {

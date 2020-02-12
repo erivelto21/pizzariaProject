@@ -1,8 +1,8 @@
-E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util\jwt\KeyGeneratorUtil.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\pagarme\Address.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\config\SecurityWebApplicationInitializer.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\resource\rest\PaymentRestController.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util\Validation\CreditCardValidation.java
+E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\filter\JWTAuthenticationFilter.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\Customer.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\pagarme\TransactionsPagarMe.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\Type.java

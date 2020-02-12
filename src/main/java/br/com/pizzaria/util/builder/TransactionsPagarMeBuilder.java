@@ -1,6 +1,5 @@
 package br.com.pizzaria.util.builder;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class TransactionsPagarMeBuilder {
 		TransactionsPagarMe transactionsPagarMe = new TransactionsPagarMe();
 		
 		transactionsPagarMe.setApiKey(apiKey);
-		transactionsPagarMe.setAmount(this.getAmount(this.customer.getCart()));
+		transactionsPagarMe.setAmount(this.customer.getAmount().toString().replace(".", ""));
 		transactionsPagarMe.setCardCvv(this.customer.getCreditCard().getCardCvv() + "");
 		transactionsPagarMe.setCardExpirationDate(this.customer.getCreditCard().getCardExpirationDate() + "");
 		transactionsPagarMe.setCardHolderName(this.customer.getCreditCard().getCardHolderName());
@@ -110,10 +109,6 @@ public class TransactionsPagarMeBuilder {
 		
 		return list;
 	}
-	
-	private String removeDot(BigDecimal amount) {
-		return amount.toString().replace(".", "");
-	}
 
 	private String preparePhone(String phone) {
 		phone = phone.replace("(", "");
@@ -121,16 +116,5 @@ public class TransactionsPagarMeBuilder {
 		phone = phone.replace("-", "");
 		phone = phone.replace(" ", "");
 		return phone;
-	}
-	
-	private String getAmount(List<Pizza> list) {
-		BigDecimal amount = new BigDecimal("00.00");
-
-		for(Pizza orderedPizza: list) {
-			int aux = orderedPizza.getAmount();
-			amount = amount.add(orderedPizza.getFlavor().getPrice().multiply(new BigDecimal(aux)));
-		}
-
-		return this.removeDot(amount);
 	}
 }

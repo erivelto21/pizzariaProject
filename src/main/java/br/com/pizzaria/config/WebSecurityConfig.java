@@ -3,6 +3,7 @@ package br.com.pizzaria.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import br.com.pizzaria.filter.JWTAuthenticationFilter;
 import br.com.pizzaria.filter.JWTLoginFilter;
 
 @Configuration
@@ -26,11 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private JWTLoginFilter filter;
 	
 	protected void configure(HttpSecurity httpSecurity) throws Exception{
-		httpSecurity.csrf().disable()
-		.authorizeRequests().antMatchers("/login").permitAll().and()
-		.authorizeRequests().antMatchers("/flavor").permitAll().and()
-		.authorizeRequests().anyRequest().authenticated().and()
-		.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);	
+		httpSecurity.csrf().disable().authorizeRequests()
+		.antMatchers("/login").permitAll()
+		.antMatchers("/flavor").permitAll()
+		.anyRequest().authenticated().and()
+		.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);	
 	}
 	
 	@Bean

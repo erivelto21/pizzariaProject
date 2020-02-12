@@ -65,7 +65,8 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		order.setPizzas(customer.getCart());
 		order.setUser(customer.getSystemUser());
-		
+		order.setTotal(customer.getAmount());
+
 		order.setTransactionId(this.getJsonValue(transactionResponse, "tid"));
 		order.setTransactionStatus(this.getJsonValue(transactionResponse, "status"));
 		

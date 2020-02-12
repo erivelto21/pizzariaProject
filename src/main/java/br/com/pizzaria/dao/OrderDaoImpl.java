@@ -28,7 +28,7 @@ public class OrderDaoImpl implements OrderDao{
 
 	public List<Order> getByUser(long id) {
 		return this.entityManager
-				.createQuery("select o from Order o where o.user = :user", Order.class)
+				.createQuery("select o from Order o where o.user.id = :user", Order.class)
 				.setParameter("user", id)
 				.getResultList();
 	}

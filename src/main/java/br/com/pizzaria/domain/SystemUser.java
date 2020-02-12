@@ -16,23 +16,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Entity
 @Table(name = "user")
 public class SystemUser {
-	
-	public SystemUser() {
-		
-	}
-	
-	public SystemUser(String email, String password){
-		this.email = email;
-		this.password = password;
-	}
-	
-	public SystemUser(long id, String name, String firstName, String lastName, String password, Role role) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.role = role;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +45,23 @@ public class SystemUser {
 	private Address address;
 	
 	private String phone;
+	
+	public SystemUser() {
+		
+	}
+	
+	public SystemUser(String email, String password){
+		this.email = email;
+		this.password = password;
+	}
+	
+	public SystemUser(long id, String name, String firstName, String lastName, String password, Role role) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+		this.role = role;
+	}
 
 	public long getId() {
 		return id;
