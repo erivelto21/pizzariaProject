@@ -11,7 +11,7 @@ public class SystemUserValidation {
 		} 
 		
 		if(!passwordIsValid(user.getPassword())) {
-			throw new SystemUserInvalidException("Senha inválido");
+			throw new SystemUserInvalidException("Senha inválida");
 		}
 		
 		if(!nameIsvALID(user.getFirstName(), user.getLastName())) {

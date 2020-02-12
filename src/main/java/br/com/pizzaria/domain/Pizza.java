@@ -16,14 +16,14 @@ public class Pizza {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="flavor_id_fk", nullable=false)
+	@JoinColumn(name="flavor_id", nullable=false)
 	private Flavor flavor;
 	
 	@Column(nullable = false)
 	private int amount;
 	
 	@ManyToOne
-	@JoinColumn(name = "order_id_fk")
+	@JoinColumn(name = "order_id")
 	private Order order;
 
 	public long getId() {

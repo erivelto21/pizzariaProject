@@ -2,6 +2,7 @@ br\com\pizzaria\exception\SystemUserInvalidException.class
 br\com\pizzaria\service\FlavorServiceImpl.class
 br\com\pizzaria\resource\rest\exception\SystemUserExceptionController.class
 br\com\pizzaria\domain\Customer.class
+br\com\pizzaria\domain\ErrorMessage.class
 br\com\pizzaria\util\jwt\TokenJWTUtil.class
 br\com\pizzaria\config\SecurityWebApplicationInitializer.class
 br\com\pizzaria\exception\CreditCardInvalidException.class
@@ -19,6 +20,7 @@ br\com\pizzaria\service\UserDetailsServiceImpl.class
 br\com\pizzaria\domain\pagarme\Customer.class
 br\com\pizzaria\service\FlavorService.class
 br\com\pizzaria\dao\OrderDaoImpl.class
+br\com\pizzaria\filter\ExceptionFilter.class
 br\com\pizzaria\domain\SystemUser.class
 br\com\pizzaria\service\PaymentService.class
 br\com\pizzaria\service\PaymentServiceImpl.class
@@ -35,6 +37,7 @@ br\com\pizzaria\domain\pagarme\Item.class
 br\com\pizzaria\domain\Ingredient.class
 br\com\pizzaria\dao\FlavorDao.class
 br\com\pizzaria\domain\pagarme\TransactionsPagarMe.class
+br\com\pizzaria\service\ErrorMessageService.class
 br\com\pizzaria\config\SpringJpaConfig.class
 br\com\pizzaria\resource\rest\FlavorRestController.class
 br\com\pizzaria\resource\rest\UserRestController.class
