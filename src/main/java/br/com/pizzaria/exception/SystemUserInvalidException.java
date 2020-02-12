@@ -7,5 +7,4 @@ public class SystemUserInvalidException extends RuntimeException{
 	public SystemUserInvalidException(String message) {
 		super(message);
 	}
-
 }

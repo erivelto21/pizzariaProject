@@ -11,7 +11,7 @@ import br.com.pizzaria.domain.Address;
 import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.exception.EmailExistException;
 import br.com.pizzaria.exception.SystemUserInvalidException;
-import br.com.pizzaria.util.jwt.SystemUserValidation;
+import br.com.pizzaria.util.Validation.SystemUserValidation;
 
 @Service
 @Transactional

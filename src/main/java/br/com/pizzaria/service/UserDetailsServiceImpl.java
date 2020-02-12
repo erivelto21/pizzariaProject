@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		SystemUser user = service.getSystemUser(email);
 		UserDetails userDetails = null;
-		
+
 		if(user != null) {
 			List<GrantedAuthority> grantedAuthorityList = getGrantedAuthorityList(user);
 			userDetails = new User(user.getEmail(),
