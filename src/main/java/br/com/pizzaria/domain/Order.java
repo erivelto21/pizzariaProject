@@ -34,7 +34,7 @@ public class Order {
 	private BigDecimal total;
 	
 	@ManyToOne
-	@JoinColumn(name = "user")
+	@JoinColumn(name = "user_id")
 	private SystemUser user;
 	
     @JsonIgnoreProperties({"order"})

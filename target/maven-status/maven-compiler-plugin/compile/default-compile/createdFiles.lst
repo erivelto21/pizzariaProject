@@ -1,6 +1,5 @@
 br\com\pizzaria\exception\SystemUserInvalidException.class
 br\com\pizzaria\service\FlavorServiceImpl.class
-br\com\pizzaria\util\jwt\JsonConverter.class
 br\com\pizzaria\resource\rest\exception\SystemUserExceptionController.class
 br\com\pizzaria\domain\Customer.class
 br\com\pizzaria\util\jwt\TokenJWTUtil.class
@@ -29,6 +28,7 @@ br\com\pizzaria\domain\Order.class
 br\com\pizzaria\dao\SystemUserDaoImpl.class
 br\com\pizzaria\config\SpringInitConfig.class
 br\com\pizzaria\filter\JWTAuthenticationFilter.class
+br\com\pizzaria\util\JsonToStringConverter.class
 br\com\pizzaria\util\Validation\CreditCardValidation.class
 br\com\pizzaria\service\OrderServiceImpl.class
 br\com\pizzaria\domain\pagarme\Item.class

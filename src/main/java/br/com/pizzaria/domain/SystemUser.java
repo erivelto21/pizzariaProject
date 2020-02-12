@@ -37,11 +37,11 @@ public class SystemUser {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties({"users"})
 	@ManyToOne()
-    @JoinColumn(name="role")
+    @JoinColumn(name="role_id")
 	private Role role;
 
 	@OneToOne
-	@JoinColumn(name="address")
+	@JoinColumn(name="address_id")
 	private Address address;
 	
 	private String phone;

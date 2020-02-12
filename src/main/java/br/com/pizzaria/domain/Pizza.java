@@ -16,7 +16,7 @@ public class Pizza {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="flavor", nullable=false)
+	@JoinColumn(name="flavor_id_fk", nullable=false)
 	private Flavor flavor;
 	
 	@Column(nullable = false)
