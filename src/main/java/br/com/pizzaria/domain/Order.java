@@ -33,6 +33,9 @@ public class Order {
 	@Column(nullable = false)
 	private BigDecimal total;
 	
+	@Column(name="payment_way", nullable = false)
+	private String paymentWay;
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private SystemUser user;
@@ -71,6 +74,14 @@ public class Order {
 
 	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public String getPaymentWay() {
+		return paymentWay;
+	}
+
+	public void setPaymentWay(String paymentWay) {
+		this.paymentWay = paymentWay;
 	}
 
 	public SystemUser getUser() {

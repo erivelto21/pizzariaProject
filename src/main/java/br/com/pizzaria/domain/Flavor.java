@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +34,7 @@ public class Flavor {
 	@Enumerated(EnumType.STRING)
 	private Type type;
 	
-	@ManyToMany(fetch = FetchType.EAGER)//ver isso aqui do eager 
+	@ManyToMany
 	@JoinTable(name="ingredient_flavor",
     joinColumns={@JoinColumn(name="flavor_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="ingredient_id", referencedColumnName="id")})
