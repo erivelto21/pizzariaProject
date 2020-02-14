@@ -1,6 +1,7 @@
 package br.com.pizzaria.domain;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,6 +33,9 @@ public class Order {
 	
 	@Column(nullable = false)
 	private BigDecimal total;
+	
+	@Column(nullable = false)
+	private Calendar date;
 	
 	@Column(name="payment_way", nullable = false)
 	private String paymentWay;
@@ -74,6 +78,14 @@ public class Order {
 
 	public void setTotal(BigDecimal total) {
 		this.total = total;
+	}
+
+	public Calendar getDate() {
+		return date;
+	}
+
+	public void setDate(Calendar date) {
+		this.date = date;
 	}
 
 	public String getPaymentWay() {

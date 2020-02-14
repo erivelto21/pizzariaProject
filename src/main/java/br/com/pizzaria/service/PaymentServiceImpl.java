@@ -1,6 +1,7 @@
 package br.com.pizzaria.service;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.client.Client;
@@ -67,7 +68,8 @@ public class PaymentServiceImpl implements PaymentService{
 		order.setUser(customer.getSystemUser());
 		order.setTotal(customer.getAmount());
 		order.setPaymentWay(customer.getPaymentWay());
-
+		order.setDate(Calendar.getInstance());
+		
 		order.setTransactionId(this.getJsonValue(transactionResponse, "tid"));
 		order.setTransactionStatus(this.getJsonValue(transactionResponse, "status"));
 		
