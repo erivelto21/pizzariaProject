@@ -5,3 +5,7 @@
 127.0.0.1 - - [15/Feb/2020:15:59:14 -0200] "PUT /pizzaria/user HTTP/1.1" 200 298 http-bio-9090-exec-1 633
 127.0.0.1 - - [15/Feb/2020:15:59:19 -0200] "POST /pizzaria/payment/creditCard HTTP/1.1" 200 66 http-bio-9090-exec-2 1684
 127.0.0.1 - - [15/Feb/2020:15:59:20 -0200] "GET /pizzaria/order/user/1 HTTP/1.1" 200 7585 http-bio-9090-exec-3 109
+127.0.0.1 - - [15/Feb/2020:16:15:00 -0200] "POST /pizzaria/payment/creditCard HTTP/1.1" 200 66 http-bio-9090-exec-1 2753
+127.0.0.1 - - [15/Feb/2020:16:15:00 -0200] "GET /pizzaria/order/user/1 HTTP/1.1" 200 9896 http-bio-9090-exec-2 269
+127.0.0.1 - - [15/Feb/2020:16:16:23 -0200] "POST /pizzaria/payment/creditCard HTTP/1.1" 200 66 http-bio-9090-exec-1 2562
+127.0.0.1 - - [15/Feb/2020:16:16:23 -0200] "GET /pizzaria/order/user/1 HTTP/1.1" 200 10664 http-bio-9090-exec-2 304
