@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.service.SystemUserService;
-import br.com.pizzaria.util.JsonToStringConverter;
+import br.com.pizzaria.util.JsonUtil;
 import br.com.pizzaria.util.jwt.TokenJWTUtil;
 
 @Component
@@ -52,7 +52,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter  {
 		response.addHeader("Authorization", "Bearer" + TokenJWTUtil.generateTokenJWT(auth.getName(), Collections.emptyList()));
 		response.setContentType("application/json");
 		
-		String userJson = JsonToStringConverter.convert(this.service.getSystemUser(auth.getName()));
+		String userJson = JsonUtil.objectToJson(this.service.getSystemUser(auth.getName()));
 		response.getWriter().write(userJson);
 	}
 }

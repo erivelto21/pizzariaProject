@@ -1,9 +1,7 @@
 package br.com.pizzaria.service;
 
-import java.io.IOException;
 import java.util.Calendar;
 
-import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -14,14 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import br.com.pizzaria.domain.Customer;
 import br.com.pizzaria.domain.CustomizedTransactionResponse;
 import br.com.pizzaria.domain.Order;
 import br.com.pizzaria.domain.Pizza;
+import br.com.pizzaria.util.JsonUtil;
 import br.com.pizzaria.util.Validation.CreditCardValidation;
 import br.com.pizzaria.util.builder.TransactionsPagarMeBuilder;
 
@@ -70,14 +65,14 @@ public class PaymentServiceImpl implements PaymentService{
 		order.setPaymentWay(customer.getPaymentWay());
 		order.setDate(Calendar.getInstance());
 		
-		order.setTransactionId(this.getJsonValue(transactionResponse, "tid"));
-		order.setTransactionStatus(this.getJsonValue(transactionResponse, "status"));
+		order.setTransactionId(JsonUtil.getJsonValue(transactionResponse, "tid"));
+		order.setTransactionStatus(JsonUtil.getJsonValue(transactionResponse, "status"));
 		
 		this.service.createOrder(order);
 	}
 	
 	private CustomizedTransactionResponse getCustomizedTransactionResponse(String transactionResponse) {
-		String status = this.getJsonValue(transactionResponse, "status");
+		String status = JsonUtil.getJsonValue(transactionResponse, "status");
 
 		if(status.equals("refused"))
 			return new CustomizedTransactionResponse("Transação recusada", status);
@@ -88,38 +83,13 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 	
 	private String customerToTransactionJson(Customer customer) {
-		String transactionJson = "";
-		
-		ObjectMapper objectMapper = new ObjectMapper();
 		
 		TransactionsPagarMeBuilder transactionsPagarMeBuilder = new TransactionsPagarMeBuilder(customer, apiKey);
 		
-		try {
-			transactionJson = objectMapper.writeValueAsString(transactionsPagarMeBuilder.Builder());
-		} catch (JsonProcessingException e) {
-			throw new InternalServerErrorException("Um error aconteceu, error: error durante a conversão da Jtransação");
-		}
+		
+		String transactionJson = JsonUtil.objectToJson(transactionsPagarMeBuilder.Builder());
+		
 		
 		return transactionJson;
 	}
-	
-	private String getJsonValue(String json, String name) {
-		String value = "";
-		
-		try {
-			ObjectNode node = new ObjectMapper().readValue(json, ObjectNode.class);
-
-			if (node.has(name))
-				value = removeDoubleQuotes(node.get(name).toString());
-		} catch (IOException e) {
-			throw new InternalServerErrorException("Um error aconteceu, error: error durante a obtenção do valor do json");
-		}
-		
-		return value;
-	}
-	
-	private String removeDoubleQuotes(String string) {
-		return string.replace("\"", "");
-	}
-
 }
