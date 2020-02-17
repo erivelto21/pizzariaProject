@@ -9,7 +9,6 @@ public class ErrorMessage {
 	private HttpStatus httpStatus;
 	
 	public ErrorMessage(String message, String description, HttpStatus httpStatus) {
-		super();
 		this.message = message;
 		this.description = description;
 		this.httpStatus = httpStatus;

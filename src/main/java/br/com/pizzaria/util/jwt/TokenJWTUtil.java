@@ -12,8 +12,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class TokenJWTUtil {
 	
-	static final long EXPIRATION_TIME = 86000000;// almost one day
-	static final String SECRET = "cGl6emFyaWE";//pizzaria into EncodeBase64;
+	private static final long EXPIRATION_TIME = 86000000;// almost one day
+	private static final String SECRET = "cGl6emFyaWE";//pizzaria into EncodeBase64;
 	
 	public static String generateTokenJWT(String username, List<String> roles) {
 		return Jwts.builder()

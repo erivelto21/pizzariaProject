@@ -6,7 +6,6 @@ E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\filter\JWTAuthenticationFilter.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\Customer.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\pagarme\TransactionsPagarMe.java
-E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util\JsonToStringConverter.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\Type.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util\builder\TransactionsPagarMeBuilder.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util\Validation\SystemUserValidation.java
@@ -34,6 +33,7 @@ E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\doma
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\exception\SystemUserInvalidException.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\Role.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\exception\EmailExistException.java
+E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\util\JsonUtil.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\dao\FlavorDaoImpl.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\dao\SystemUserDao.java
 E:\Projetos\Java Web\pizzariaProject\pizzaria\src\main\java\br\com\pizzaria\domain\CustomizedTransactionResponse.java

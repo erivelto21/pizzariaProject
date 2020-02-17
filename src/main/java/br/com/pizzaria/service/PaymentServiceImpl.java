@@ -47,7 +47,7 @@ public class PaymentServiceImpl implements PaymentService{
 		String transactionResponse = this.webTarget.request("application/json;charset=UTF-8")
 				.post(Entity.entity(this.customerToTransactionJson(customer), MediaType.APPLICATION_JSON))
 				.readEntity(String.class);
-		
+		System.out.println(transactionResponse);
 		this.saveTransaction(customer, transactionResponse);
 		
 		return this.getCustomizedTransactionResponse(transactionResponse);

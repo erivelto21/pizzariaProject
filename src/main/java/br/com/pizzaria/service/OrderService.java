@@ -6,9 +6,9 @@ import br.com.pizzaria.domain.Order;
 
 public interface OrderService {
 
-	public void createOrder(Order order);
+	void createOrder(Order order);
 	
-	public Order get(long id);
+	Order get(long id);
 	
-	public List<Order> getAllByUser(long id);
+	List<Order> getAllByUser(long id);
 }

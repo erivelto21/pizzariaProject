@@ -22,7 +22,7 @@ public class UserRestController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public SystemUser save(@RequestBody SystemUser user) throws Exception {
+	public SystemUser save(@RequestBody SystemUser user) {
 		return this.service.save(user);
 	}
 	

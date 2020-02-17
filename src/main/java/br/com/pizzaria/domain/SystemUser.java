@@ -34,6 +34,8 @@ public class SystemUser {
 	@Column(nullable = false)
 	private String password;
 	
+	private String phone;
+	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties({"users"})
 	@ManyToOne()
@@ -43,9 +45,7 @@ public class SystemUser {
 	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
-	
-	private String phone;
-	
+
 	public SystemUser() {
 		
 	}
@@ -53,14 +53,6 @@ public class SystemUser {
 	public SystemUser(String email, String password){
 		this.email = email;
 		this.password = password;
-	}
-	
-	public SystemUser(long id, String name, String firstName, String lastName, String password, Role role) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.role = role;
 	}
 
 	public long getId() {
@@ -103,6 +95,14 @@ public class SystemUser {
 		this.password = password;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -117,13 +117,5 @@ public class SystemUser {
 
 	public void setAddress(Address address) {
 		this.address = address;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 }
