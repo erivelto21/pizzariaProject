@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.pizzaria.exception.CreditCardInvalidException;
+import br.com.pizzaria.exception.CustomerInvalidException;
 import br.com.pizzaria.exception.EmailExistException;
 import br.com.pizzaria.exception.SystemUserInvalidException;
 import br.com.pizzaria.service.ErrorMessageService;
@@ -19,7 +20,9 @@ public class SystemUserExceptionController {
 	@Autowired
 	private ErrorMessageService service;
 	
-	@ExceptionHandler(value= {EmailExistException.class, SystemUserInvalidException.class, CreditCardInvalidException.class})
+	@ExceptionHandler(value=
+		{EmailExistException.class, 
+				CustomerInvalidException.class, SystemUserInvalidException.class, CreditCardInvalidException.class})
 	public ResponseEntity<Object> badRequestExceptions(Exception exception){
 		return new ResponseEntity<>(
 				this.service.response(

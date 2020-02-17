@@ -16,8 +16,10 @@ import br.com.pizzaria.domain.Customer;
 import br.com.pizzaria.domain.CustomizedTransactionResponse;
 import br.com.pizzaria.domain.Order;
 import br.com.pizzaria.domain.Pizza;
+import br.com.pizzaria.exception.CustomerInvalidException;
 import br.com.pizzaria.util.JsonUtil;
 import br.com.pizzaria.util.Validation.CreditCardValidation;
+import br.com.pizzaria.util.Validation.CustomerValidation;
 import br.com.pizzaria.util.builder.TransactionsPagarMeBuilder;
 
 
@@ -39,8 +41,7 @@ public class PaymentServiceImpl implements PaymentService{
 	
 	public CustomizedTransactionResponse creditCardPayment(Customer customer) {
 		
-		if(!CreditCardValidation.creditCardIsValid(customer.getCreditCard()))
-			return null;
+		CustomerValidation.customerIsValid(customer);
 		
 		this.webTarget = this.client.target(END_POINT).path("transactions");
 
@@ -73,7 +74,10 @@ public class PaymentServiceImpl implements PaymentService{
 	
 	private CustomizedTransactionResponse getCustomizedTransactionResponse(String transactionResponse) {
 		String status = JsonUtil.getJsonValue(transactionResponse, "status");
+		String type = JsonUtil.getJsonValue(transactionResponse, "errors");
 
+		if(!type.equals(""))
+			throw new CustomerInvalidException("Ocorreu um error com a plataforma de pagamentos online");
 		if(status.equals("refused"))
 			return new CustomizedTransactionResponse("Transação recusada", status);
 		if(status.equals("paid"))

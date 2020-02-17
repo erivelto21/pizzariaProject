@@ -11,6 +11,7 @@ br\com\pizzaria\domain\Role.class
 br\com\pizzaria\service\SystemUserService.class
 br\com\pizzaria\service\OrderService.class
 br\com\pizzaria\domain\pagarme\Billing.class
+br\com\pizzaria\util\Validation\CustomerValidation.class
 br\com\pizzaria\domain\Type.class
 br\com\pizzaria\resource\rest\OrderRestController.class
 br\com\pizzaria\dao\FlavorDaoImpl.class
@@ -39,6 +40,7 @@ br\com\pizzaria\dao\FlavorDao.class
 br\com\pizzaria\domain\pagarme\TransactionsPagarMe.class
 br\com\pizzaria\service\ErrorMessageService.class
 br\com\pizzaria\config\SpringJpaConfig.class
+br\com\pizzaria\exception\CustomerInvalidException.class
 br\com\pizzaria\resource\rest\FlavorRestController.class
 br\com\pizzaria\resource\rest\UserRestController.class
 br\com\pizzaria\domain\Flavor.class
