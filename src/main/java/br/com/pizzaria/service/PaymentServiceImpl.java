@@ -18,7 +18,6 @@ import br.com.pizzaria.domain.Order;
 import br.com.pizzaria.domain.Pizza;
 import br.com.pizzaria.exception.CustomerInvalidException;
 import br.com.pizzaria.util.JsonUtil;
-import br.com.pizzaria.util.Validation.CreditCardValidation;
 import br.com.pizzaria.util.Validation.CustomerValidation;
 import br.com.pizzaria.util.builder.TransactionsPagarMeBuilder;
 

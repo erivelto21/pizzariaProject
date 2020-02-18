@@ -14,7 +14,7 @@ import br.com.pizzaria.domain.CustomizedTransactionResponse;
 import br.com.pizzaria.service.PaymentService;
 
 @RestController
-@RequestMapping(value="/payment", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE )
+@RequestMapping(value="/payment", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 public class PaymentRestController {
 	
 	@Autowired

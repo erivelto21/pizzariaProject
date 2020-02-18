@@ -14,7 +14,7 @@ import br.com.pizzaria.domain.Flavor;
 import br.com.pizzaria.service.FlavorService;
 
 @RestController
-@RequestMapping(value="/flavor", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value="/flavor", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class FlavorRestController {
 	
 	@Autowired

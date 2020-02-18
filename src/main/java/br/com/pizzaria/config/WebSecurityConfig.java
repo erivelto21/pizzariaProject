@@ -26,9 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 	
 	@Autowired
-	private JWTLoginFilter filter;
-	
-	@Autowired
 	private JWTAuthenticationFilter jwtAuthenticationFilter;
 	
 	@Autowired
@@ -38,11 +35,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable().authorizeRequests()
 		.antMatchers("/login").permitAll()
 		.antMatchers("/flavor").permitAll()
+		.antMatchers("/home").permitAll()
 		.antMatchers(HttpMethod.POST, "/user").permitAll()
 		.anyRequest().authenticated().and()
 		.addFilterBefore(exceptionFilter, UsernamePasswordAuthenticationFilter.class)
-		.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore( jwtLoginFilter(), UsernamePasswordAuthenticationFilter.class)
 		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+	}
+	
+	@Bean
+	public JWTLoginFilter jwtLoginFilter() throws Exception{
+	    return new JWTLoginFilter(authenticationManager());
 	}
 	
 	@Bean

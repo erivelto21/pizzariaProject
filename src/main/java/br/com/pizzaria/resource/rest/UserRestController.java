@@ -14,7 +14,7 @@ import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.service.SystemUserService;
 
 @RestController
-@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController {
 
 	@Autowired

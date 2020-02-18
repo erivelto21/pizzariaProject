@@ -15,7 +15,7 @@ import br.com.pizzaria.domain.Order;
 import br.com.pizzaria.service.OrderService;
 
 @RestController
-@RequestMapping(value="/order", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE )
+@RequestMapping(value="/order", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE )
 public class OrderRestController {
 
 	@Autowired
