@@ -29,6 +29,6 @@ public class UserRestController {
 	@PutMapping
 	@ResponseStatus(HttpStatus.OK)
 	public SystemUser updateAddress(@RequestBody SystemUser user) {
-		return this.service.updateAddress(user);
+		return this.service.createAddress(user);
 	}
 }

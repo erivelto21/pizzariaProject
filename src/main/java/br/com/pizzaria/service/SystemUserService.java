@@ -10,5 +10,5 @@ public interface SystemUserService {
 	
 	SystemUser save(SystemUser user);
 	
-	SystemUser updateAddress(SystemUser user);
+	SystemUser createAddress(SystemUser user);
 }

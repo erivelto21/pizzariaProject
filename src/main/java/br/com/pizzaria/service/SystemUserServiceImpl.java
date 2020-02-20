@@ -1,5 +1,7 @@
 package br.com.pizzaria.service;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,57 +17,73 @@ import br.com.pizzaria.util.Validation.SystemUserValidation;
 
 @Service
 @Transactional
-public class SystemUserServiceImpl implements SystemUserService{
+public class SystemUserServiceImpl implements SystemUserService {
 
 	@Autowired
 	private SystemUserDao dao;
-	
+
 	@Transactional(readOnly = true)
 	public SystemUser getSystemUser(SystemUser user) {
-		try {
-			return dao.getSystemUser(user);
-		} catch (NoResultException e) {
-			throw new NoResultException("E-mail ou senha invalidos");
-		}
+		List<SystemUser> list = dao.getSystemUser(user);
+
+		if (list.size() > 0)
+			return list.get(0);
+
+		throw new NoResultException("E-mail ou senha invalidos");
 	}
-	
+
 	@Transactional(readOnly = true)
 	public SystemUser getSystemUser(String email) {
-		try {
-			return this.dao.getSystemUser(email);
-		} catch(NoResultException e) {
-			return null;
-		}
+		List<SystemUser> list = this.dao.getSystemUser(email);
+
+		return list.size() > 0 ? list.get(0) : new SystemUser();
 	}
-	
-	public SystemUser save(SystemUser user)  {
-		if(this.getSystemUser(user.getEmail()) == null)
-			if(SystemUserValidation.systemUserIsValid(user))
-				return dao.save(user);
-			else
-				throw new SystemUserInvalidException("Dados inválidos");
-		else
-			throw new EmailExistException("Email já em uso");
+
+	public SystemUser save(SystemUser user) {
+		this.emailIsNotUsed(user.getEmail());
+		this.SystemUserIsValid(user);
+
+		return dao.save(user);
 	}
-	
-	public SystemUser updateAddress(SystemUser user) {
-		if(user.getAddress().getId() == 0) {
+
+	public SystemUser createAddress(SystemUser user) {
+		if (user.getAddress().getId() == 0) {
 			user.getAddress().setId(this.dao.saveAddress(user.getAddress()));
 			this.dao.updateSystemUser(user);
 		} else {
-			if(!phoneIsEqual(user))
-				this.dao.updateSystemUser(user);
-			if(!addressIsEqual(user.getAddress()))
-				this.dao.updateAddress(user.getAddress());
+			this.updatePhone(user);
+			this.updateAddress(user);
 		}
-		
+
 		return user;
 	}
-	
+
+	private void updatePhone(SystemUser user) {
+		if (!phoneIsEqual(user))
+			this.dao.updateSystemUser(user);
+	}
+
+	private void updateAddress(SystemUser user) {
+		if (!addressIsEqual(user.getAddress()))
+			this.dao.updateAddress(user.getAddress());
+	}
+
+	private void emailIsNotUsed(String email) {
+		if (getSystemUser(email).getEmail() == null)
+			return;
+		throw new EmailExistException("Email já em uso");
+	}
+
+	private boolean SystemUserIsValid(SystemUser user) {
+		if (SystemUserValidation.systemUserIsValid(user))
+			return true;
+		throw new SystemUserInvalidException("Dados inválidos");
+	}
+
 	private boolean phoneIsEqual(SystemUser user) {
 		return user.getPhone().equals(this.dao.getPhone(user.getId()));
 	}
-	
+
 	private boolean addressIsEqual(Address address) {
 		return address.toString().equals(this.dao.get(address.getId()).toString());
 	}
