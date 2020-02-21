@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 
@@ -25,33 +26,35 @@ import br.com.pizzaria.util.JsonUtil;
 import br.com.pizzaria.util.jwt.TokenJWTUtil;
 
 @Component
-public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter  {
-	
+public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
+
 	@Autowired
 	private SystemUserService service;
-	
+
 	@Autowired
-	public JWTLoginFilter(AuthenticationManager authManager) {
+	public JWTLoginFilter(AuthenticationManager authManager, AuthenticationFailureHandler authenticationFailureHandler) {
 		super(new AntPathRequestMatcher("/login", "POST"));
 		setAuthenticationManager(authManager);
+		setAuthenticationFailureHandler(authenticationFailureHandler);
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
-		
+
 		SystemUser user = new ObjectMapper().readValue(request.getInputStream(), SystemUser.class);
-		
-		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(),
-				user.getPassword(), Collections.emptyList()));
+
+		return getAuthenticationManager().authenticate(
+				new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), Collections.emptyList()));
 	}
 
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain, Authentication auth) throws IOException, ServletException {
-		
-		response.addHeader("Authorization", "Bearer" + TokenJWTUtil.generateTokenJWT(auth.getName(), Collections.emptyList()));
+
+		response.addHeader("Authorization",
+				"Bearer" + TokenJWTUtil.generateTokenJWT(auth.getName(), Collections.emptyList()));
 		response.setContentType("application/json");
-		
+
 		String userJson = JsonUtil.objectToJson(this.service.getSystemUser(auth.getName()));
 		response.getWriter().write(userJson);
 	}

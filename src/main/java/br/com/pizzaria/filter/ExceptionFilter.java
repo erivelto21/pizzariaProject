@@ -6,6 +6,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,17 +27,24 @@ public class ExceptionFilter extends GenericFilterBean{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		try {
+			response.setCharacterEncoding("UTF-8");
 			chain.doFilter(request, response);
 		} catch(JsonMappingException e) {
 			response.getWriter().write(
 					this.service.response("Json null", "Json estar vazio", HttpStatus.BAD_REQUEST));
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.setStatus(400);
+			
 			return;
 		}catch(Exception e) {
 			response.getWriter().write(
 					this.service.response(
 							e.getMessage(),
-							e.getLocalizedMessage(), 
+							e.toString(), 
 							HttpStatus.INTERNAL_SERVER_ERROR));
+			HttpServletResponse r = (HttpServletResponse) response;
+			r.setStatus(500);
+			
 			return;
 		}
 	}
