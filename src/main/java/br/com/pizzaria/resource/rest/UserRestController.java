@@ -26,9 +26,15 @@ public class UserRestController {
 		return this.service.save(user);
 	}
 	
-	@PutMapping
-	@ResponseStatus(HttpStatus.OK)
-	public SystemUser updateAddress(@RequestBody SystemUser user) {
-		return this.service.createAddress(user);
+	@PutMapping(value = "/phone")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void updatePhone(@RequestBody SystemUser user) {
+		this.service.createPhone(user);
+	}
+	
+	@PutMapping(value = "/address")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void updateAddress(@RequestBody SystemUser user) {
+		this.service.createAddress(user);
 	}
 }

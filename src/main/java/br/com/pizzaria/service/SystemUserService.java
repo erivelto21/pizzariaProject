@@ -10,5 +10,7 @@ public interface SystemUserService {
 	
 	SystemUser save(SystemUser user);
 	
-	SystemUser createAddress(SystemUser user);
+	void createAddress(SystemUser user);
+	
+	void createPhone(SystemUser user);
 }

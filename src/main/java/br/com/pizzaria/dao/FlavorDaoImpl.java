@@ -20,5 +20,4 @@ public class FlavorDaoImpl implements FlavorDao{
 				.createQuery("select f from Flavor f", Flavor.class)
 				.getResultList();
 	}
-
 }

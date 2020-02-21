@@ -39,9 +39,8 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 	
 	public CustomizedTransactionResponse creditCardPayment(Customer customer) {
-		
 		CustomerValidation.customerIsValid(customer);
-		
+
 		this.webTarget = this.client.target(END_POINT).path("transactions");
 
 		String transactionResponse = this.webTarget.request("application/json;charset=UTF-8")

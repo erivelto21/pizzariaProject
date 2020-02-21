@@ -36,26 +36,35 @@ public class SystemUserServiceImpl implements SystemUserService {
 	public SystemUser getSystemUser(String email) {
 		List<SystemUser> list = this.dao.getSystemUser(email);
 
-		return list.size() > 0 ? list.get(0) : new SystemUser();
+		return list.size() > 0 ? list.get(0) : null;
 	}
 
 	public SystemUser save(SystemUser user) {
 		this.emailIsNotUsed(user.getEmail());
-		this.SystemUserIsValid(user);
+		this.systemUserIsValid(user);
 
 		return dao.save(user);
 	}
 
-	public SystemUser createAddress(SystemUser user) {
+	public void createAddress(SystemUser user) {
+		SystemUserValidation.addressIsValid(user.getAddress());
+		
 		if (user.getAddress().getId() == 0) {
 			user.getAddress().setId(this.dao.saveAddress(user.getAddress()));
 			this.dao.updateSystemUser(user);
 		} else {
-			this.updatePhone(user);
 			this.updateAddress(user);
 		}
-
-		return user;
+	}
+	
+	public void createPhone(SystemUser user) {
+		if(user.getPhone() != null) {
+			SystemUserValidation.phoneIsValid(user.getPhone());
+			this.updatePhone(user);
+			return;
+		}
+		
+		throw new SystemUserInvalidException("Telefone vazio");
 	}
 
 	private void updatePhone(SystemUser user) {
@@ -69,12 +78,12 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 
 	private void emailIsNotUsed(String email) {
-		if (getSystemUser(email).getEmail() == null)
+		if (getSystemUser(email) == null)
 			return;
 		throw new EmailExistException("Email já em uso");
 	}
 
-	private boolean SystemUserIsValid(SystemUser user) {
+	private boolean systemUserIsValid(SystemUser user) {
 		if (SystemUserValidation.systemUserIsValid(user))
 			return true;
 		throw new SystemUserInvalidException("Dados inválidos");

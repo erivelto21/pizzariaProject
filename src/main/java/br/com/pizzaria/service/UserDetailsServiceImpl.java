@@ -17,31 +17,32 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.pizzaria.domain.SystemUser;
 
 @Service("userDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService{
-	
+public class UserDetailsServiceImpl implements UserDetailsService {
+
 	@Autowired
 	private SystemUserService service;
-	
+
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		SystemUser user = service.getSystemUser(email);
 		UserDetails userDetails = null;
 
-		if(user != null) {
-			List<GrantedAuthority> grantedAuthorityList = getGrantedAuthorityList(user);
-			userDetails = new User(user.getEmail(),
-					new BCryptPasswordEncoder().encode(user.getPassword()),
-					grantedAuthorityList);
+		if (user == null) {
+			throw new UsernameNotFoundException(email);
 		}
-		
+
+		List<GrantedAuthority> grantedAuthorityList = getGrantedAuthorityList(user);
+		userDetails = new User(user.getEmail(), new BCryptPasswordEncoder().encode(user.getPassword()),
+				grantedAuthorityList);
+
 		return userDetails;
 	}
-	
-	private List<GrantedAuthority> getGrantedAuthorityList(SystemUser user){
+
+	private List<GrantedAuthority> getGrantedAuthorityList(SystemUser user) {
 		List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
-		
+
 		grantedAuthorityList.add(new SimpleGrantedAuthority(user.getRole().getName()));
-		
+
 		return grantedAuthorityList;
 	}
 

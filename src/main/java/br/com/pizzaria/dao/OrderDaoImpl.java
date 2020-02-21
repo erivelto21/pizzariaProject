@@ -19,11 +19,11 @@ public class OrderDaoImpl implements OrderDao{
 		this.entityManager.persist(order);
 	}
 
-	public Order get(long id) {
+	public List<Order> get(long id) {
 		return this.entityManager
 				.createQuery("select o from Order o where o.id = :id", Order.class)
 				.setParameter("id", id)
-				.getSingleResult();
+				.getResultList();
 	}
 
 	public List<Order> getByUser(long id) {

@@ -20,8 +20,8 @@ public class PaymentRestController {
 	@Autowired
 	private PaymentService service;
 	
-	@PostMapping(value="/creditCard")
-	@ResponseStatus(HttpStatus.OK)
+	@PostMapping(value="/creditcard")
+	@ResponseStatus(HttpStatus.CREATED)
 	public CustomizedTransactionResponse creditCardPayment(@RequestBody Customer customer) {
 		return this.service.creditCardPayment(customer);
 	}

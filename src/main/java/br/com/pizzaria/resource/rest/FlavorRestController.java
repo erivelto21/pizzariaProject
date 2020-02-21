@@ -25,5 +25,4 @@ public class FlavorRestController {
 	public List<Flavor> getAllFlavors(){
 		return this.service.getAllFlavorsList();
 	}
-
 }

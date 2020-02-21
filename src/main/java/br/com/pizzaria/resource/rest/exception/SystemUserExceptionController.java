@@ -41,14 +41,4 @@ public class SystemUserExceptionController {
 						HttpStatus.NOT_FOUND),  
 				HttpStatus.NOT_FOUND);
 	}
-	
-	@ExceptionHandler(value= {Exception.class})
-	public ResponseEntity<Object> Exceptions(Exception exception){
-		return new ResponseEntity<>(
-				this.service.response(
-						exception.getMessage(), 
-						exception.getLocalizedMessage(), 
-						HttpStatus.INTERNAL_SERVER_ERROR), 
-				HttpStatus.INTERNAL_SERVER_ERROR);
-	}
 }
