@@ -11,10 +11,11 @@ import br.com.pizzaria.exception.CustomerInvalidException;
 public class CustomerValidation {
 
 	public static boolean customerIsValid(Customer customer) {
+		customerIsNull(customer);
 		if(!addressIsValid(customer.getSystemUser().getAddress())) {
 			throw new CustomerInvalidException("Endereço inválido");
 		}
-		
+
 		if(!phoneIsValid(customer.getSystemUser().getPhone())) {
 			throw new CustomerInvalidException("Telefone inválido");
 		}
@@ -31,9 +32,25 @@ public class CustomerValidation {
 			if(!creditCardIsValid(customer.getCreditCard())) {
 				throw new CustomerInvalidException("Cartão invalido");
 			}
+		} else {
+			throw new CustomerInvalidException("Forma de pagamento inválido");
 		}
 		
+		
 		return true;
+	}
+	
+	private static void customerIsNull(Customer customer) {
+		if(customer == null)
+			throw new CustomerInvalidException("Cliente vazio");
+		if(customer.getCart() == null)
+			throw new CustomerInvalidException("Carrinho vazio");
+		if(customer.getCreditCard() == null)
+			throw new CustomerInvalidException("Cartão vazio");
+		if(customer.getPaymentWay() == null)
+			throw new CustomerInvalidException("Método de pagamento vazio");
+		if(customer.getSystemUser() == null)
+			throw new CustomerInvalidException("Usuário vazio");
 	}
 	
 	private static boolean addressIsValid(Address address) {

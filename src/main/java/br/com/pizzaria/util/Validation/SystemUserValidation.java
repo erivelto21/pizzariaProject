@@ -1,5 +1,6 @@
 package br.com.pizzaria.util.Validation;
 
+import br.com.pizzaria.domain.Address;
 import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.exception.SystemUserInvalidException;
 
@@ -21,9 +22,26 @@ public class SystemUserValidation {
 		return true;
 	}
 	
+	public static boolean phoneIsValid(String phone) {
+		if(!(16 > phone.length() && phone.length() > 13 && (phone.matches("(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})"))))
+			throw new SystemUserInvalidException("Telefone inválido");
+		return true;
+	}
+	
+	public static boolean addressIsValid(Address address) {
+		if(address == null)
+			throw new SystemUserInvalidException("Endereço Vazio");
+		if(!(address.getCity() != null && address.getNeighborhood() != null))
+			throw new SystemUserInvalidException("Endereço inválido");
+		if(!(address.getNumber() != 0 && address.getState() != null))
+			throw new SystemUserInvalidException("Endereço inválido");
+		if(!(address.getStreet() != null))
+			throw new SystemUserInvalidException("Endereço inválido");
+		return true;
+	}
+	
 	private static boolean emailIsValid(String email) {
-		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-		return email.matches(regex);
+		return email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
 	}
 	
 	private static boolean passwordIsValid(String password) {

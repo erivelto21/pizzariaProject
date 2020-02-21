@@ -20,7 +20,7 @@ public class TokenJWTUtil {
 				.signWith(SignatureAlgorithm.HS256, SECRET)
 				.setHeaderParam("typ","JWT")
                 .setSubject(username)
-                .setIssuer("pizzaria")//change later
+                .setIssuer("pizzaria")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .claim("roles", roles)
