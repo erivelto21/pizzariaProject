@@ -87,4 +87,12 @@ public class OrderRestControllerTest {
 
 		assertTrue(list.size() > 0);
 	}
+	
+	@Test
+	public void TestOrderlistByUserIsNotFound() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/order/user/100").contentType(MediaType.APPLICATION_JSON)
+						.accept(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(MockMvcResultMatchers.status().isNotFound()).andReturn();
+	}
 }
