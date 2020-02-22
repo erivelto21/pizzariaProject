@@ -23,6 +23,16 @@ public class SystemUserServiceImpl implements SystemUserService {
 	private SystemUserDao dao;
 
 	@Transactional(readOnly = true)
+	public SystemUser getSystemUser(long id) {
+		List<SystemUser> list = this.dao.getSystemUser(id);
+		
+		if(list.size() > 0)
+			return list.get(0);
+		
+		throw new NoResultException("Usuário não encontrado");
+	}
+	
+	@Transactional(readOnly = true)
 	public SystemUser getSystemUser(SystemUser user) {
 		List<SystemUser> list = dao.getSystemUser(user);
 

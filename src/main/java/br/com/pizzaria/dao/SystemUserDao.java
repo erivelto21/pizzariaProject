@@ -7,6 +7,8 @@ import br.com.pizzaria.domain.SystemUser;
 
 public interface SystemUserDao {
 
+	List<SystemUser> getSystemUser(long id);
+	
 	List<SystemUser> getSystemUser(SystemUser user);
 
 	List<SystemUser> getSystemUser(String email);

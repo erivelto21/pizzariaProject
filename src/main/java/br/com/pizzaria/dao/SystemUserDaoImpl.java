@@ -16,6 +16,11 @@ public class SystemUserDaoImpl implements SystemUserDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	public List<SystemUser> getSystemUser(long id) {
+		return this.entityManager.createQuery("select u from SystemUser u where u.id = :id", SystemUser.class)
+				.setParameter("id", id).getResultList();
+	}
+	
 	public List<SystemUser> getSystemUser(SystemUser user) {
 		return this.entityManager
 				.createQuery("select u from SystemUser u where u.email = :email and u.password = :password",
