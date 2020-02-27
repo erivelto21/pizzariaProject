@@ -44,7 +44,7 @@ public class CustomFlavor {
 	@JoinTable(name="custom_ingredient_custom_flavor",
     joinColumns={@JoinColumn(name="custom_flavor_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="custom_ingredient_id", referencedColumnName="id")})
-	private List<CustomIngredient> customIngredient;
+	private List<CustomIngredient> ingredients;
 
 	public long getId() {
 		return id;
@@ -94,17 +94,11 @@ public class CustomFlavor {
 		this.additionalsValue = additionalsValue;
 	}
 
-	public List<CustomIngredient> getCustomIngredient() {
-		return customIngredient;
+	public List<CustomIngredient> getIngredients() {
+		return ingredients;
 	}
 
-	public void setCustomIngredient(List<CustomIngredient> customIngredient) {
-		this.customIngredient = customIngredient;
-	}
-
-	@Override
-	public String toString() {
-		return "CustomFlavor [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", type=" + type
-				+ ", additionalsValue=" + additionalsValue + ", customIngredient=" + customIngredient + "]";
+	public void setIngredients(List<CustomIngredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 }
