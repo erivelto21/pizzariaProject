@@ -103,7 +103,7 @@ public class TransactionsPagarMeBuilder {
 		List<Item> list = new ArrayList<Item>();
 		int i = 1;
 		for(Pizza o: orderedPizzas) {
-			list.add(new Item(i + "" , "Pizza de " + o.getFlavor().getName(), o.getAmount(), o.getFlavor().getPrice().intValue()));
+			list.add(new Item(i + "" , "Pizza de " + o.getCustomFlavor().getName(), o.getAmount(), o.getCustomFlavor().getPrice().intValue()));
 			i++;
 		}
 		

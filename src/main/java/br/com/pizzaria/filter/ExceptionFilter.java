@@ -36,16 +36,6 @@ public class ExceptionFilter extends GenericFilterBean{
 			httpResponse.setStatus(400);
 			
 			return;
-		}catch(Exception e) {
-			response.getWriter().write(
-					this.service.response(
-							e.getMessage(),
-							e.toString(), 
-							HttpStatus.INTERNAL_SERVER_ERROR));
-			HttpServletResponse r = (HttpServletResponse) response;
-			r.setStatus(500);
-			
-			return;
 		}
 	}
 

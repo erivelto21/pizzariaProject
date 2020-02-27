@@ -46,7 +46,7 @@ public class PaymentServiceImpl implements PaymentService{
 		String transactionResponse = this.webTarget.request("application/json;charset=UTF-8")
 				.post(Entity.entity(this.customerToTransactionJson(customer), MediaType.APPLICATION_JSON))
 				.readEntity(String.class);
-		System.out.println(transactionResponse);
+
 		this.saveTransaction(customer, transactionResponse);
 		
 		return this.getCustomizedTransactionResponse(transactionResponse);
@@ -54,16 +54,16 @@ public class PaymentServiceImpl implements PaymentService{
 	
 	private void saveTransaction(Customer customer, String transactionResponse) {
 		Order order = new Order();
-		
+
 		for(Pizza p: customer.getCart())
 			p.setOrder(order);
-		
+
 		order.setPizzas(customer.getCart());
 		order.setUser(customer.getSystemUser());
 		order.setTotal(customer.getAmount());
 		order.setPaymentWay(customer.getPaymentWay());
 		order.setDate(Calendar.getInstance());
-		
+
 		order.setTransactionId(JsonUtil.getJsonValue(transactionResponse, "tid"));
 		order.setTransactionStatus(JsonUtil.getJsonValue(transactionResponse, "status"));
 		

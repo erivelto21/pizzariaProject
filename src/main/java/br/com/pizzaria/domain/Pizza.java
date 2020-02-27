@@ -1,5 +1,6 @@
 package br.com.pizzaria.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +16,9 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="flavor_id", nullable=false)
-	private Flavor flavor;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="custom_flavor_id", nullable=false)
+	private CustomFlavor customFlavor;
 	
 	@Column(nullable = false)
 	private int amount;
@@ -34,12 +35,12 @@ public class Pizza {
 		this.id = id;
 	}
 
-	public Flavor getFlavor() {
-		return flavor;
+	public CustomFlavor getCustomFlavor() {
+		return customFlavor;
 	}
 
-	public void setFlavor(Flavor flavor) {
-		this.flavor = flavor;
+	public void setCustomFlavor(CustomFlavor customFlavor) {
+		this.customFlavor = customFlavor;
 	}
 
 	public int getAmount() {

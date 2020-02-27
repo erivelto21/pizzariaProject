@@ -53,12 +53,14 @@ public class Customer {
 	public BigDecimal getAmount() {
 		if(this.cart == null)
 			throw new CustomerInvalidException("Carrinho vazio");
-		
+
 		BigDecimal amount = new BigDecimal("00.00");
 
 		for(Pizza orderedPizza: this.cart) {
 			int aux = orderedPizza.getAmount();
-			amount = amount.add(orderedPizza.getFlavor().getPrice().multiply(new BigDecimal(aux)));
+			amount = amount
+					.add(orderedPizza.getCustomFlavor().getPrice().multiply(new BigDecimal(aux)))
+					.add(orderedPizza.getCustomFlavor().getAdditionalsValue());
 		}
 
 		return amount;
