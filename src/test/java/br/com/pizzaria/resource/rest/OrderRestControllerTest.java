@@ -47,7 +47,7 @@ public class OrderRestControllerTest {
 	@Test
 	public void TestSingleOrder() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/order/2").contentType(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.get("/order/102").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 	}

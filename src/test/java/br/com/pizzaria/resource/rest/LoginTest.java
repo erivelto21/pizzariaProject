@@ -71,7 +71,7 @@ public class LoginTest {
 		String s = result.getResponse().getHeader("Authorization").replace("Bearer", "");
 
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/order/2").header("Authorization", s)
+				.perform(MockMvcRequestBuilders.get("/order/102").header("Authorization", s)
 						.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -79,7 +79,7 @@ public class LoginTest {
 	@Test
 	public void TestgetNotAuthenticatedOrder() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/order/2").contentType(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.get("/order/102").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isForbidden());
 	}
