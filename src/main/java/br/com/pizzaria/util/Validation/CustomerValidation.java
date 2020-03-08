@@ -30,12 +30,12 @@ public class CustomerValidation {
 		}
 		
 		if(!(cartItemsAreValid(customer.getCart()))) {
-			
+			throw new CustomerInvalidException("Item do carrinho é inválido");
 		}
 
 		if (customer.getPaymentWay().equals("Cartão de crédito")) {
 			if (!creditCardIsValid(customer.getCreditCard())) {
-				throw new CustomerInvalidException("Cartão invalido");
+				throw new CustomerInvalidException("Cartão inválido");
 			}
 		} else {
 			throw new CustomerInvalidException("Forma de pagamento inválido");
@@ -79,6 +79,9 @@ public class CustomerValidation {
 
 	private static boolean cartItemsAreValid(List<Pizza> list) {
 		for (Pizza p : list) {
+			if(!(pizzaIsValid(p))) {
+				return false;
+			}
 			customFlavorIsValid(p.getCustomFlavor());
 		}
 
@@ -108,6 +111,20 @@ public class CustomerValidation {
 			throw new CustomerInvalidException("Tipo vazio");
 		}
 
+		return true;
+	}
+	
+	private static boolean pizzaIsValid(Pizza pizza) {
+		if(pizza.getDough() == null) {
+			return false;
+		}
+		if(pizza.getPizzaEdge() == null) {
+			return false;
+		}
+		if(pizza.getSize() == null) {
+			return false;
+		}
+		
 		return true;
 	}
 }

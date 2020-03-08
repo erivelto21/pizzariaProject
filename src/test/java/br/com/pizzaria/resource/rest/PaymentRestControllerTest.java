@@ -27,7 +27,10 @@ import br.com.pizzaria.domain.CreditCard;
 import br.com.pizzaria.domain.CustomFlavor;
 import br.com.pizzaria.domain.CustomIngredient;
 import br.com.pizzaria.domain.Customer;
+import br.com.pizzaria.domain.Dough;
 import br.com.pizzaria.domain.Pizza;
+import br.com.pizzaria.domain.PizzaEdge;
+import br.com.pizzaria.domain.Size;
 import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.domain.Type;
 import br.com.pizzaria.service.SystemUserService;
@@ -104,10 +107,16 @@ public class PaymentRestControllerTest {
 		Pizza pizza = new Pizza();
 		pizza.setAmount(1);
 		pizza.setCustomFlavor(customFlavor);
+		pizza.setDough(Dough.NOVAIORQUINA);
+		pizza.setSize(Size.GRANDE);
+		pizza.setPizzaEdge(PizzaEdge.CHEDDAR);
 
 		Pizza pizza1 = new Pizza();
 		pizza1.setAmount(2);
 		pizza1.setCustomFlavor(customFlavor1);
+		pizza1.setDough(Dough.TRADICIONAL);
+		pizza1.setSize(Size.EXTRAGRANDE);
+		pizza1.setPizzaEdge(PizzaEdge.CATUPIRY);
 		
 		List<Pizza> lista = new ArrayList<Pizza>();
 		lista.add(pizza);
@@ -184,10 +193,16 @@ public class PaymentRestControllerTest {
 		Pizza pizza = new Pizza();
 		pizza.setAmount(1);
 		pizza.setCustomFlavor(customFlavor);
+		pizza.setDough(Dough.NOVAIORQUINA);
+		pizza.setSize(Size.GRANDE);
+		pizza.setPizzaEdge(PizzaEdge.CHEDDAR);
 
 		Pizza pizza1 = new Pizza();
 		pizza1.setAmount(2);
 		pizza1.setCustomFlavor(customFlavor1);
+		pizza1.setDough(Dough.TRADICIONAL);
+		pizza1.setSize(Size.EXTRAGRANDE);
+		pizza1.setPizzaEdge(PizzaEdge.CATUPIRY);
 		
 		List<Pizza> lista = new ArrayList<Pizza>();
 		lista.add(pizza);
@@ -252,7 +267,7 @@ public class PaymentRestControllerTest {
 		is1.add(i1);
 		
 		CustomFlavor customFlavor1 = new CustomFlavor();
-		customFlavor1.setName("");
+		customFlavor1.setName("Nutella");
 		customFlavor1.setType(Type.DOCE);
 		customFlavor1.setIngredients(is1);
 		customFlavor1.setImage("/assets/img/Nutella.jpg");
@@ -262,10 +277,16 @@ public class PaymentRestControllerTest {
 		Pizza pizza = new Pizza();
 		pizza.setAmount(1);
 		pizza.setCustomFlavor(customFlavor);
+		pizza.setDough(Dough.NOVAIORQUINA);
+		pizza.setSize(null);
+		pizza.setPizzaEdge(PizzaEdge.CHEDDAR);
 
 		Pizza pizza1 = new Pizza();
 		pizza1.setAmount(2);
 		pizza1.setCustomFlavor(customFlavor1);
+		pizza1.setDough(Dough.TRADICIONAL);
+		pizza1.setSize(Size.EXTRAGRANDE);
+		pizza1.setPizzaEdge(PizzaEdge.CATUPIRY);
 		
 		List<Pizza> lista = new ArrayList<Pizza>();
 		lista.add(pizza);

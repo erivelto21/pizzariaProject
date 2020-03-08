@@ -3,6 +3,8 @@ package br.com.pizzaria.domain;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,18 @@ public class Pizza {
 	
 	@Column(nullable = false)
 	private int amount;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Dough dough;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Size size;
+	
+	@Column(name="pizza_edge", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private PizzaEdge pizzaEdge;
 	
 	@ManyToOne
 	@JoinColumn(name = "order_id")
@@ -49,6 +63,30 @@ public class Pizza {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public Dough getDough() {
+		return dough;
+	}
+
+	public void setDough(Dough dough) {
+		this.dough = dough;
+	}
+
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
+
+	public PizzaEdge getPizzaEdge() {
+		return pizzaEdge;
+	}
+
+	public void setPizzaEdge(PizzaEdge pizzaEdge) {
+		this.pizzaEdge = pizzaEdge;
 	}
 
 	public Order getOrder() {
