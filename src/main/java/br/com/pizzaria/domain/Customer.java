@@ -57,9 +57,10 @@ public class Customer {
 		BigDecimal amount = new BigDecimal("00.00");
 
 		for(Pizza orderedPizza: this.cart) {
+			orderedPizza.calculateAdditionals();
 			int aux = orderedPizza.getAmount();
 			amount = amount
-					.add(orderedPizza.getCustomFlavor().getPrice().add(orderedPizza.getCustomFlavor().getAdditionalsValue())
+					.add(orderedPizza.calculatePrizePerSize().add(orderedPizza.getAdditionalsValue())
 					.multiply(new BigDecimal(aux)));
 		}
 

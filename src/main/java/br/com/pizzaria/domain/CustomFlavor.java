@@ -37,9 +37,6 @@ public class CustomFlavor {
 	@Enumerated(EnumType.STRING)
 	private Type type;
 	
-	@Column(name = "additionals_value", nullable = false)
-	private BigDecimal additionalsValue;
-	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="custom_ingredient_custom_flavor",
     joinColumns={@JoinColumn(name="custom_flavor_id", referencedColumnName="id")},
@@ -84,14 +81,6 @@ public class CustomFlavor {
 
 	public void setType(Type type) {
 		this.type = type;
-	}
-
-	public BigDecimal getAdditionalsValue() {
-		return additionalsValue;
-	}
-
-	public void setAdditionalsValue(BigDecimal additionalsValue) {
-		this.additionalsValue = additionalsValue;
 	}
 
 	public List<CustomIngredient> getIngredients() {
