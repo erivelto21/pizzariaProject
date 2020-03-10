@@ -31,6 +31,9 @@ public class Order {
 	@Column(name="transaction_status", nullable = false)
 	private String transactionStatus;
 	
+	@Column(name="delivery_fee", nullable = false)
+	private BigDecimal deliveryFee;
+	
 	@Column(nullable = false)
 	private BigDecimal total;
 	
@@ -70,6 +73,14 @@ public class Order {
 
 	public void setTransactionStatus(String transactionStatus) {
 		this.transactionStatus = transactionStatus;
+	}
+
+	public BigDecimal getDeliveryFee() {
+		return deliveryFee;
+	}
+
+	public void setDeliveryFee(BigDecimal deliveryFee) {
+		this.deliveryFee = deliveryFee;
 	}
 
 	public BigDecimal getTotal() {

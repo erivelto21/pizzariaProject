@@ -1,5 +1,6 @@
 package br.com.pizzaria.service;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import javax.ws.rs.client.Client;
@@ -59,8 +60,9 @@ public class PaymentServiceImpl implements PaymentService{
 			p.setOrder(order);
 
 		order.setPizzas(customer.getCart());
+		order.setDeliveryFee(new BigDecimal("10.00"));
 		order.setUser(customer.getSystemUser());
-		order.setTotal(customer.getAmount());
+		order.setTotal(customer.getAmount().add(order.getDeliveryFee()));
 		order.setPaymentWay(customer.getPaymentWay());
 		order.setDate(Calendar.getInstance());
 
