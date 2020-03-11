@@ -16,13 +16,14 @@ import org.springframework.web.filter.GenericFilterBean;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import br.com.pizzaria.service.ErrorMessageService;
+import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
 public class ExceptionFilter extends GenericFilterBean{
 
 	@Autowired
 	private ErrorMessageService service;
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -32,6 +33,13 @@ public class ExceptionFilter extends GenericFilterBean{
 		} catch(JsonMappingException e) {
 			response.getWriter().write(
 					this.service.response("Json null", "Json estar vazio", HttpStatus.BAD_REQUEST));
+			HttpServletResponse httpResponse = (HttpServletResponse) response;
+			httpResponse.setStatus(400);
+			
+			return;
+		}catch(ExpiredJwtException e) {
+			response.getWriter().write(
+					this.service.response("JWT Token inválido", "O token expirou", HttpStatus.BAD_REQUEST));
 			HttpServletResponse httpResponse = (HttpServletResponse) response;
 			httpResponse.setStatus(400);
 			

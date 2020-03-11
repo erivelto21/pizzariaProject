@@ -47,7 +47,7 @@ public class OrderRestControllerTest {
 	@Test
 	public void TestSingleOrder() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/order/102").contentType(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.get("/order/199").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 	}
@@ -55,7 +55,7 @@ public class OrderRestControllerTest {
 	@Test
 	public void TestOrderNotFound() throws Exception {
 		this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/order/200").contentType(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.get("/order/20").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isNotFound()).andReturn();
 	}
@@ -63,7 +63,7 @@ public class OrderRestControllerTest {
 	@Test
 	public void TestOrderlistByUserIsEmpty() throws Exception {
 		MvcResult result = this.mockMvc
-				.perform(MockMvcRequestBuilders.get("/order/user/20").contentType(MediaType.APPLICATION_JSON)
+				.perform(MockMvcRequestBuilders.get("/order/user/3").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -81,7 +81,7 @@ public class OrderRestControllerTest {
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 		ObjectMapper objectMapper = new ObjectMapper();
-
+		result.getResponse().setCharacterEncoding("UTF-8");
 		List<Order> list = objectMapper.readValue(result.getResponse().getContentAsString(),
 				objectMapper.getTypeFactory().constructCollectionType(List.class, Order.class));
 
