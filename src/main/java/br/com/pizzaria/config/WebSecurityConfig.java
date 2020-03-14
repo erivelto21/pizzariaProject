@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/login").permitAll()
 				.antMatchers("/flavor").permitAll()
+				.antMatchers("/pizza").permitAll()
 				.antMatchers(HttpMethod.POST, "/user").permitAll()
 				.anyRequest().authenticated().and()
 				.addFilterBefore(exceptionFilter, UsernamePasswordAuthenticationFilter.class)
