@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import br.com.pizzaria.filter.ExceptionFilter;
 import br.com.pizzaria.filter.JWTAuthenticationFilter;
@@ -33,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private ExceptionFilter exceptionFilter;
 
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/login").permitAll()
+		httpSecurity.cors().and().csrf().disable().authorizeRequests().antMatchers("/login").permitAll()
 				.antMatchers("/flavor").permitAll()
 				.antMatchers("/pizza").permitAll()
 				.antMatchers(HttpMethod.POST, "/user").permitAll()
@@ -43,6 +45,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+				.exposedHeaders("Authorization")
+				.allowedHeaders("*")
+				.allowedMethods("*")
+				.allowedOrigins("*");
+			}
+		};
+	}
+	
 	@Bean
 	public JWTLoginFilter jwtLoginFilter() throws Exception {
 		return new JWTLoginFilter(authenticationManager(), loginAuthenticationFailureHandler());
