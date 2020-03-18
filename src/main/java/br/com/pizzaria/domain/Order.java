@@ -44,7 +44,7 @@ public class Order {
 	private String paymentWay;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "system_user_id")
 	private SystemUser user;
 	
     @JsonIgnoreProperties({"order"})

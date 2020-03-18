@@ -19,7 +19,7 @@ import javax.persistence.SqlResultSetMapping;
 		@FieldResult(name = "amount", column = "amount") }))
 @NamedNativeQuery(
 		  name = "RankItem",
-		  query = "SELECT  f.name, f.type, f.price, sum(amount) as amount FROM pizza as p JOIN custom_flavor as f ON p.custom_flavor_id = f.id group by f.name order by amount desc",
+		  query = "SELECT  f.name, f.type, f.price, sum(amount) as amount FROM pizza as p JOIN custom_flavor as f ON p.custom_flavor_id = f.id group by f.name, f.type, f.price, amount order by amount desc",
 		  resultSetMapping = "RankItemMapping")
 @Entity
 public class RankItem {
