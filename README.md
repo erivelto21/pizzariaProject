@@ -14,6 +14,7 @@
 <p>this repository together with pizzariaProjectAngular repository from the back end and front end of the project. Any criticism or idea feel free to say</p>
 
 <h3>API Endpoints</h3>
+<p>any endpoint needs /pizzaria before. ex: /pizzaria/flavor</p>
 <h6>the endpoints that do not need authentication are:<h6>
   <ul>
     <li>/flavor - METHOD GET - Request Body Parameter: none - this endpoint gets all the flavors registered.</li>
@@ -29,3 +30,5 @@
     <li>/order/user/{id} - METHOD GET - Request Body Parameter: none - this endpoint searches an order by its system user id.</li>
     <li>/payment/creditcard - METHOD POST - Request Body Parameter: Customer object - this endpoint makes a payment with a credit card.</li>
   </ul>
+  <h6>My API is deployed on heroku if you wanna give a try the url is below: </h6>
+  <p>https://app-pizzaria-rest.herokuapp.com<p>
