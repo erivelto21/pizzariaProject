@@ -55,7 +55,10 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 				"Bearer" + TokenJWTUtil.generateTokenJWT(auth.getName(), Collections.emptyList()));
 		response.setContentType("application/json");
 
-		String userJson = JsonUtil.objectToJson(this.service.getSystemUser(auth.getName()));
+		SystemUser systemUser = this.service.getSystemUser(auth.getName());
+		systemUser.setPassword("");
+		
+		String userJson = JsonUtil.objectToJson(systemUser);
 		response.getWriter().write(userJson);
 	}
 }
