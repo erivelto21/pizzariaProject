@@ -7,11 +7,11 @@
 <p>-spring security.</p>
 <p>-spring web.</p>
 <p>-hibernate.</p>
-<p>-jjwt.</p>
+<p>-jwt.</p>
 <p>-maven.</p>
 <p>-JUnit.</p>
 <p>-PostgreSQL.</p>
-<p>this repository together with pizzariaProjectAngular repository from the back end and front end of the project. Any criticism or idea feel free to say</p>
+<p>this repository together with pizzariaProjectAngular repository form the back end and front end of the project. Any criticism or idea feel free to say.</p>
 
 <h3>API Endpoints</h3>
 <p>any endpoint needs /pizzaria before. ex: /pizzaria/flavor</p>
