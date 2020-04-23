@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,9 @@ public class SystemUserServiceImpl implements SystemUserService {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
 	public SystemUser getSystemUser(long id) {
@@ -55,6 +59,8 @@ public class SystemUserServiceImpl implements SystemUserService {
 	public SystemUser save(SystemUser user) {
 		this.emailIsNotUsed(user.getEmail());
 		this.systemUserIsValid(user);
+
+		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 		
 		SystemUser systemUser = dao.save(user);
 		
