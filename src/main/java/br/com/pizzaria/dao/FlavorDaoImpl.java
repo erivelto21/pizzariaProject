@@ -20,4 +20,11 @@ public class FlavorDaoImpl implements FlavorDao{
 				.createQuery("select f from Flavor f", Flavor.class)
 				.getResultList();
 	}
+
+	public List<Flavor> getById(long id) {
+		return this.entityManager
+				.createQuery("select f from Flavor f where f.id = :id", Flavor.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
 }

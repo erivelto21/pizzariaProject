@@ -2,6 +2,8 @@ package br.com.pizzaria.service;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,5 +21,15 @@ public class FlavorServiceImpl implements FlavorService{
 	@Transactional(readOnly = true)
 	public List<Flavor> getAllFlavorsList() {
 		return dao.getAllFlavors();
+	}
+
+	@Transactional(readOnly = true)
+	public Flavor getById(long id) {
+		List<Flavor> list = dao.getById(id);
+		
+		if(list.size() > 0)
+			return list.get(0);
+		
+		throw new NoResultException("Sabor não encontrado");
 	}
 }
