@@ -20,7 +20,9 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.pizzaria.domain.Account;
 import br.com.pizzaria.domain.SystemUser;
+import br.com.pizzaria.service.AccountService;
 import br.com.pizzaria.service.SystemUserService;
 import br.com.pizzaria.util.JsonUtil;
 import br.com.pizzaria.util.jwt.TokenJWTUtil;
@@ -30,6 +32,9 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 
 	@Autowired
 	private SystemUserService service;
+	
+	@Autowired
+	private AccountService accountService;
 
 	@Autowired
 	public JWTLoginFilter(AuthenticationManager authManager, AuthenticationFailureHandler authenticationFailureHandler) {
@@ -56,9 +61,14 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		response.setContentType("application/json");
 
 		SystemUser systemUser = this.service.getSystemUser(auth.getName());
-		systemUser.setPassword("");
 		
-		String userJson = JsonUtil.objectToJson(systemUser);
-		response.getWriter().write(userJson);
+		Account account = accountService.getByUser(systemUser.getId());
+		account.getSystemUser().setPassword("");
+		account.getFavorites().forEach((flavor) -> {
+			flavor.setIngredients(null);
+		});
+		
+		String accountJson = JsonUtil.objectToJson(account);
+		response.getWriter().write(accountJson);
 	}
 }

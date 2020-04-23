@@ -21,6 +21,9 @@ public class SystemUserServiceImpl implements SystemUserService {
 
 	@Autowired
 	private SystemUserDao dao;
+	
+	@Autowired
+	private AccountService accountService;
 
 	@Transactional(readOnly = true)
 	public SystemUser getSystemUser(long id) {
@@ -52,8 +55,12 @@ public class SystemUserServiceImpl implements SystemUserService {
 	public SystemUser save(SystemUser user) {
 		this.emailIsNotUsed(user.getEmail());
 		this.systemUserIsValid(user);
-
-		return dao.save(user);
+		
+		SystemUser systemUser = dao.save(user);
+		
+		accountService.createAccount(systemUser);
+		
+		return systemUser;
 	}
 
 	public void createAddress(SystemUser user) {
