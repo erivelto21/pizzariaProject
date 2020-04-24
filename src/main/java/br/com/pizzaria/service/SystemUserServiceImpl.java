@@ -69,35 +69,40 @@ public class SystemUserServiceImpl implements SystemUserService {
 		return systemUser;
 	}
 
-	public void createAddress(SystemUser user) {
-		SystemUserValidation.addressIsValid(user.getAddress());
-		
-		if (user.getAddress().getId() == 0) {
-			user.getAddress().setId(this.dao.saveAddress(user.getAddress()));
-			this.dao.updateSystemUser(user);
+	public void addressManagement(Address address, long systemUserId) {
+		SystemUserValidation.addressIsValid(address);
+
+		SystemUser systemUser = this.getSystemUser(systemUserId);
+
+		if (systemUser.getAddress() == null) {
+			systemUser.setAddress(this.dao.saveAddress(address));
+			this.dao.updateSystemUser(systemUser);
 		} else {
-			this.updateAddress(user);
+			this.updateAddress(systemUser, address);
 		}
 	}
 	
-	public void createPhone(SystemUser user) {
-		if(user.getPhone() != null) {
-			SystemUserValidation.phoneIsValid(user.getPhone());
-			this.updatePhone(user);
-			return;
-		}
+	public void phoneManagement(String phone, long systemUserId) {
+		SystemUser systemUser = this.getSystemUser(systemUserId);
+
+		SystemUserValidation.phoneIsValid(phone);
 		
-		throw new SystemUserInvalidException("Telefone vazio");
+		if(systemUser.getPhone() == null) {
+			systemUser.setPhone(phone);
+			this.dao.updateSystemUser(systemUser);
+		} else {
+			this.updatePhone(systemUser, phone);
+		}
 	}
 
-	private void updatePhone(SystemUser user) {
-		if (!phoneIsEqual(user))
-			this.dao.updateSystemUser(user);
+	private void updatePhone(SystemUser systemUser, String phone) {
+		if (!systemUser.getPhone().equals(phone))
+			this.dao.updateSystemUser(systemUser);
 	}
 
-	private void updateAddress(SystemUser user) {
-		if (!addressIsEqual(user.getAddress()))
-			this.dao.updateAddress(user.getAddress());
+	private void updateAddress(SystemUser systemUser, Address address) {
+		if (!systemUser.getAddress().equals(address))
+			this.dao.updateAddress(address);
 	}
 
 	private void emailIsNotUsed(String email) {
@@ -110,13 +115,5 @@ public class SystemUserServiceImpl implements SystemUserService {
 		if (SystemUserValidation.systemUserIsValid(user))
 			return true;
 		throw new SystemUserInvalidException("Dados inválidos");
-	}
-
-	private boolean phoneIsEqual(SystemUser user) {
-		return user.getPhone().equals(this.dao.getPhone(user.getId()));
-	}
-
-	private boolean addressIsEqual(Address address) {
-		return address.toString().equals(this.dao.get(address.getId()).toString());
 	}
 }

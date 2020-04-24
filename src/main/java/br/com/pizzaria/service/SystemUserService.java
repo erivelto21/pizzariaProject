@@ -1,5 +1,6 @@
 package br.com.pizzaria.service;
 
+import br.com.pizzaria.domain.Address;
 import br.com.pizzaria.domain.SystemUser;
 
 public interface SystemUserService {
@@ -12,7 +13,7 @@ public interface SystemUserService {
 	
 	SystemUser save(SystemUser user);
 	
-	void createAddress(SystemUser user);
+	void addressManagement(Address address, long systemUserId);
 	
-	void createPhone(SystemUser user);
+	void phoneManagement(String phone, long systemUserId);
 }

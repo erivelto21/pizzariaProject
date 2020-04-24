@@ -97,4 +97,50 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (complement == null) {
+			if (other.complement != null)
+				return false;
+		} else if (!complement.equals(other.complement))
+			return false;
+		if (id != other.id)
+			return false;
+		if (neighborhood == null) {
+			if (other.neighborhood != null)
+				return false;
+		} else if (!neighborhood.equals(other.neighborhood))
+			return false;
+		if (number != other.number)
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
+			return false;
+		return true;
+	}
 }

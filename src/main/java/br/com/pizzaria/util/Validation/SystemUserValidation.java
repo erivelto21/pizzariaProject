@@ -33,7 +33,7 @@ public class SystemUserValidation {
 			throw new SystemUserInvalidException("Endereço Vazio");
 		if(!(address.getCity() != null && address.getNeighborhood() != null))
 			throw new SystemUserInvalidException("Endereço inválido");
-		if(!(address.getNumber() != 0 && address.getState() != null))
+		if(!((address.getNumber() != 0 && address.getNumber() < 99999999) && address.getState() != null))
 			throw new SystemUserInvalidException("Endereço inválido");
 		if(!(address.getStreet() != null))
 			throw new SystemUserInvalidException("Endereço inválido");

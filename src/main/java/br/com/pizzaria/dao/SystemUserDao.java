@@ -19,7 +19,7 @@ public interface SystemUserDao {
 
 	Address get(long id);
 
-	long saveAddress(Address address);
+	Address saveAddress(Address address);
 
 	void updateAddress(Address address);
 

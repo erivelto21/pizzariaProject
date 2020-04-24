@@ -47,9 +47,9 @@ public class SystemUserDaoImpl implements SystemUserDao {
 				.setParameter("id", id).getSingleResult();
 	}
 
-	public long saveAddress(Address address) {
+	public Address saveAddress(Address address) {
 		this.entityManager.persist(address);
-		return address.getId();
+		return address;
 	}
 
 	public void updateAddress(Address address) {
