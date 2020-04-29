@@ -10,6 +10,8 @@ public interface AccountService {
 
 	Account getByUser(long userId);
 	
+	Account getByUserEmail(String email);
+	
 	List<Flavor> getFavoritesById(long accountId);
 	
 	Account addToFavorites(long accountId, long flavorId);

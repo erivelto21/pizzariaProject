@@ -16,7 +16,6 @@ import org.springframework.web.filter.GenericFilterBean;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import br.com.pizzaria.service.ErrorMessageService;
-import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
 public class ExceptionFilter extends GenericFilterBean{
@@ -37,13 +36,6 @@ public class ExceptionFilter extends GenericFilterBean{
 			httpResponse.setStatus(400);
 			
 			return;
-		}catch(ExpiredJwtException e) {
-			response.getWriter().write(
-					this.service.response("JWT Token inválido", "O token expirou", HttpStatus.BAD_REQUEST));
-			HttpServletResponse httpResponse = (HttpServletResponse) response;
-			httpResponse.setStatus(400);
-			
-			return;
 		}catch(Exception e) {
 			response.getWriter().write(
 					this.service.response(
@@ -56,5 +48,4 @@ public class ExceptionFilter extends GenericFilterBean{
 			return;
 		}
 	}
-
 }

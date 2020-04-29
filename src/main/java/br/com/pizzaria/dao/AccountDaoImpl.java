@@ -22,6 +22,13 @@ public class AccountDaoImpl implements AccountDao{
 				.getResultList();
 	}
 	
+	public List<Account> getByUserEmail(String email) {
+		return this.entityManager
+				.createQuery("select a from Account a where a.systemUser.email = :email", Account.class)
+				.setParameter("email", email)
+				.getResultList();
+	}
+	
 	public List<Account> getById(long accountId) {
 		return this.entityManager
 				.createQuery("select a from Account a where a.id = :accountId", Account.class)

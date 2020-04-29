@@ -23,6 +23,12 @@ public class AccountRestController {
 	@Autowired
 	private AccountService service;
 	
+	@GetMapping("/{email}")
+	@ResponseStatus(HttpStatus.OK)
+	public Account getAccount(@PathVariable("email") String email) {
+		return this.service.getByUserEmail(email);
+	}
+	
 	@GetMapping("/favorite/{accountId}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Flavor> getFavoriteList(@PathVariable("accountId") long accountId) {

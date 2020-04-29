@@ -35,6 +35,16 @@ public class AccountServiceImpl implements AccountService{
 	}
 	
 	@Transactional(readOnly = true)
+	public Account getByUserEmail(String email) {
+		List<Account> list = dao.getByUserEmail(email);
+		
+		if(list.size() > 0)
+			return list.get(0);
+		
+		throw new NoResultException("Conta não encontrado pelo email do usuário");
+	}
+	
+	@Transactional(readOnly = true)
 	public List<Flavor> getFavoritesById(long accountId) {
 		return this.getById(accountId).getFavorites();
 	}
