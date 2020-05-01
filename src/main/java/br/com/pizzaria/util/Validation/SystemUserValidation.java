@@ -22,6 +22,10 @@ public class SystemUserValidation {
 		return true;
 	}
 	
+	public static boolean passwordIsValid(String password) {
+		return password.length() >= 8;
+	}
+	
 	public static boolean phoneIsValid(String phone) {
 		if(!(16 > phone.length() && phone.length() > 13 && (phone.matches("(\\(?\\d{2}\\)?\\s)?(\\d{4,5}\\-\\d{4})"))))
 			throw new SystemUserInvalidException("Telefone inválido");
@@ -42,10 +46,6 @@ public class SystemUserValidation {
 	
 	private static boolean emailIsValid(String email) {
 		return email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
-	}
-	
-	private static boolean passwordIsValid(String password) {
-		return password.length() >= 8;
 	}
 	
 	private static boolean nameIsvALID(String firstName, String lastName) {

@@ -50,6 +50,36 @@ public class UserRestControllerTest {
 	}
 	
 	@Test
+	public void testCreateANewAddress() throws Exception {
+		Address a = new Address();
+		a.setCity("Testx");
+		a.setNeighborhood("testx");
+		a.setNumber(1);
+		a.setState("testx");
+		a.setStreet("testx");
+		
+		SystemUser user = this.service.getSystemUser("tet@email.com");
+		user.setAddress(a);
+		
+		String u = JsonUtil.objectToJson(user);
+		
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.put("/user/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
+		.andExpect(MockMvcResultMatchers.status().isNoContent()).andReturn();
+	}
+	
+	@Test
+	public void testCreateANewPhone() throws Exception {
+		SystemUser user = this.service.getSystemUser("tet@email.com");
+		user.setPhone("(31) 3333-3131");
+		String u = JsonUtil.objectToJson(user);
+		
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
+		.andExpect(MockMvcResultMatchers.status().isNoContent()).andReturn();
+	}
+	
+	@Test
 	public void testCreateANewUser() throws Exception {
 		Role role = new Role();
 		role.setId(2);
@@ -71,25 +101,6 @@ public class UserRestControllerTest {
 		user = objectMapper.readValue(result.getResponse().getContentAsString(), SystemUser.class);
 		
 		assertNotSame(0L, user.getId());
-	}
-	
-	@Test
-	public void testNullNewUser() throws Exception {
-		Role role = new Role();
-		role.setId(2);
-
-		SystemUser user = new SystemUser();
-		user.setRole(role);
-		user.setFirstName("test");
-		user.setLastName("1");
-		user.setEmail("tet@email.com");
-		user.setPassword("test@email.com");
-		user = null;
-		String u = JsonUtil.objectToJson(user);
-
-		this.mockMvc
-				.perform(MockMvcRequestBuilders.post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
 	}
 	
 	@Test
@@ -131,25 +142,6 @@ public class UserRestControllerTest {
 	}
 	
 	@Test
-	public void testCreateANewAddress() throws Exception {
-		Address a = new Address();
-		a.setCity("Testx");
-		a.setNeighborhood("testx");
-		a.setNumber(1);
-		a.setState("testx");
-		a.setStreet("testx");
-		
-		SystemUser user = this.service.getSystemUser("tet@email.com");
-		user.setAddress(a);
-		
-		String u = JsonUtil.objectToJson(user);
-		
-		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isNoContent()).andReturn();
-	}
-	
-	@Test
 	public void testInvalidAddress() throws Exception {
 		Address a = new Address();
 		a.setCity("Testx");
@@ -169,6 +161,30 @@ public class UserRestControllerTest {
 	}
 	
 	@Test
+	public void testInvalidPhone() throws Exception {
+		SystemUser user = this.service.getSystemUser("tet@email.com");
+		user.setPhone("(85) q3434-2799");
+		
+		String u = JsonUtil.objectToJson(user);
+		
+		this.mockMvc
+		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+	}
+	
+	@Test
+	public void testInvalidUserPassword() throws Exception {
+		SystemUser user = this.service.getSystemUser(10L);
+		
+		user.setPassword("123");
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.patch("/user/" + user.getId() + "/password")
+						.contentType(MediaType.APPLICATION_JSON_VALUE).content(user.getPassword()))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
+	}
+	
+	@Test
 	public void testNullNewAddress() throws Exception {
 		Address a = null;
 		
@@ -183,29 +199,6 @@ public class UserRestControllerTest {
 	}
 	
 	@Test
-	public void testCreateANewPhone() throws Exception {
-		SystemUser user = this.service.getSystemUser("tet@email.com");
-		user.setPhone("(31) 3333-3131");
-		String u = JsonUtil.objectToJson(user);
-		
-		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isNoContent()).andReturn();
-	}
-	
-	@Test
-	public void testInvalidPhone() throws Exception {
-		SystemUser user = this.service.getSystemUser("tet@email.com");
-		user.setPhone("(85) q3434-2799");
-		
-		String u = JsonUtil.objectToJson(user);
-		
-		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
-	}
-	
-	@Test
 	public void testNullNewPhone() throws Exception {
 		SystemUser user = this.service.getSystemUser("tet@email.com");
 		user.setPhone("");
@@ -215,4 +208,36 @@ public class UserRestControllerTest {
 		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
 		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
 	}
+	
+	@Test
+	public void testNullNewUser() throws Exception {
+		Role role = new Role();
+		role.setId(2);
+
+		SystemUser user = new SystemUser();
+		user.setRole(role);
+		user.setFirstName("test");
+		user.setLastName("1");
+		user.setEmail("tet@email.com");
+		user.setPassword("test@email.com");
+		user = null;
+		String u = JsonUtil.objectToJson(user);
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
+				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+	}
+	
+	@Test
+	public void testUpdateUserPassword() throws Exception {
+		SystemUser user = this.service.getSystemUser(10L);
+		
+		user.setPassword("12345678");
+
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.patch("/user/" + user.getId() + "/password")
+						.contentType(MediaType.APPLICATION_JSON_VALUE).content(user.getPassword()))
+				.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
 }

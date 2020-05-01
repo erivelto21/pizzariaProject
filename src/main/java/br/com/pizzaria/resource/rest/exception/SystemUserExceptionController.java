@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import br.com.pizzaria.exception.CreditCardInvalidException;
 import br.com.pizzaria.exception.CustomerInvalidException;
 import br.com.pizzaria.exception.EmailExistException;
+import br.com.pizzaria.exception.EqualPasswordException;
 import br.com.pizzaria.exception.SystemUserInvalidException;
 import br.com.pizzaria.service.ErrorMessageService;
 
@@ -19,26 +20,19 @@ public class SystemUserExceptionController {
 
 	@Autowired
 	private ErrorMessageService service;
-	
-	@ExceptionHandler(value=
-		{EmailExistException.class, 
-				CustomerInvalidException.class, SystemUserInvalidException.class, CreditCardInvalidException.class})
-	public ResponseEntity<Object> badRequestExceptions(Exception exception){
+
+	@ExceptionHandler(value = { EmailExistException.class, CustomerInvalidException.class,
+			SystemUserInvalidException.class, CreditCardInvalidException.class, EqualPasswordException.class })
+	public ResponseEntity<Object> badRequestExceptions(Exception exception) {
 		return new ResponseEntity<>(
-				this.service.response(
-						exception.getMessage(), 
-						exception.getLocalizedMessage(), 
-						HttpStatus.BAD_REQUEST), 
+				this.service.response(exception.getMessage(), exception.getLocalizedMessage(), HttpStatus.BAD_REQUEST),
 				HttpStatus.BAD_REQUEST);
 	}
-	
-	@ExceptionHandler(value= {NoResultException.class})
-	public ResponseEntity<Object> NotFoundExceptions(Exception exception){
+
+	@ExceptionHandler(value = { NoResultException.class })
+	public ResponseEntity<Object> NotFoundExceptions(Exception exception) {
 		return new ResponseEntity<>(
-				this.service.response(
-						exception.getMessage(), 
-						exception.getLocalizedMessage(),  
-						HttpStatus.NOT_FOUND),  
+				this.service.response(exception.getMessage(), exception.getLocalizedMessage(), HttpStatus.NOT_FOUND),
 				HttpStatus.NOT_FOUND);
 	}
 }

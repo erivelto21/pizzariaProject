@@ -28,6 +28,12 @@ public class UserRestController {
 		return this.service.save(user);
 	}
 	
+	@PatchMapping("/{systemUserId}/password")
+	@ResponseStatus(HttpStatus.OK)
+	public void updatePassword(@PathVariable("systemUserId") long systemUserId, @RequestBody String password) {
+		this.service.passwordManagement(password, systemUserId);
+	}
+	
 	@PatchMapping("/{systemUserId}/phone")
 	@ResponseStatus(HttpStatus.OK)
 	public void updatePhone(@PathVariable("systemUserId") long systemUserId, @RequestBody String phone) {

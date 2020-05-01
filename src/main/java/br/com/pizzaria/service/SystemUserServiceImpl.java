@@ -13,6 +13,7 @@ import br.com.pizzaria.dao.SystemUserDao;
 import br.com.pizzaria.domain.Address;
 import br.com.pizzaria.domain.SystemUser;
 import br.com.pizzaria.exception.EmailExistException;
+import br.com.pizzaria.exception.EqualPasswordException;
 import br.com.pizzaria.exception.SystemUserInvalidException;
 import br.com.pizzaria.util.Validation.SystemUserValidation;
 
@@ -68,6 +69,22 @@ public class SystemUserServiceImpl implements SystemUserService {
 		
 		return systemUser;
 	}
+	
+	public void passwordManagement(String password, long systemUserId) {
+		if(!SystemUserValidation.passwordIsValid(password))
+			throw new SystemUserInvalidException("Senha inválida");
+		
+		SystemUser systemUser = this.getSystemUser(systemUserId);
+		
+		if(this.passwordIsEqual(password, systemUser.getPassword()))
+			throw new EqualPasswordException("Nova senha é igual a antiga");
+		
+		password = this.passwordEncoder.encode(password);
+		
+		systemUser.setPassword(password);
+		
+		this.updatePassword(systemUser);
+	}
 
 	public void addressManagement(Address address, long systemUserId) {
 		SystemUserValidation.addressIsValid(address);
@@ -94,7 +111,15 @@ public class SystemUserServiceImpl implements SystemUserService {
 			this.updatePhone(systemUser, phone);
 		}
 	}
+	
+	private boolean passwordIsEqual(String newPassword, String oldPassword) {
+		return this.passwordEncoder.matches(newPassword, oldPassword);
+	}
 
+	private void updatePassword(SystemUser systemUser) {
+		this.dao.updateSystemUser(systemUser);
+	}
+	
 	private void updatePhone(SystemUser systemUser, String phone) {
 		if (!systemUser.getPhone().equals(phone))
 			this.dao.updateSystemUser(systemUser);
