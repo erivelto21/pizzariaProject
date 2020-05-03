@@ -21,13 +21,13 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private SystemUserService service; 
 	
-	public void createOrder(Order order) {
-		this.dao.save(order);
+	public void create(Order order) {
+		this.dao.persist(order);
 	}
 
 	@Transactional(readOnly = true)
 	public Order get(long id) {
-		List<Order> list = this.dao.get(id);
+		List<Order> list = this.dao.find(id);
 
 		if (list.size() > 0)
 			return list.get(0);
@@ -36,8 +36,8 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Transactional(readOnly = true)
-	public List<Order> getAllByUser(long id) {
-		List<Order> list = this.dao.getByUser(id);
+	public List<Order> getAllBySystemUserId(long id) {
+		List<Order> list = this.dao.findBySystemUserId(id);
 		
 		systemUserExist(id);
 		
@@ -45,6 +45,6 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	private void systemUserExist(long id) {
-		this.service.getSystemUser(id);
+		this.service.get(id);
 	}
 }

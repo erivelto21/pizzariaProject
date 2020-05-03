@@ -25,8 +25,8 @@ public class AccountServiceImpl implements AccountService{
 	private FlavorService flavorService;
 	
 	@Transactional(readOnly = true)
-	public Account getByUser(long userId) {
-		List<Account> list = dao.getByUser(userId);
+	public Account getBySystemUser(long userId) {
+		List<Account> list = dao.findBySystemUserId(userId);
 		
 		if(list.size() > 0)
 			return list.get(0);
@@ -35,8 +35,8 @@ public class AccountServiceImpl implements AccountService{
 	}
 	
 	@Transactional(readOnly = true)
-	public Account getByUserEmail(String email) {
-		List<Account> list = dao.getByUserEmail(email);
+	public Account getBySystemUserEmail(String email) {
+		List<Account> list = dao.findBySystemUserEmail(email);
 		
 		if(list.size() > 0)
 			return list.get(0);
@@ -45,52 +45,52 @@ public class AccountServiceImpl implements AccountService{
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Flavor> getFavoritesById(long accountId) {
-		return this.getById(accountId).getFavorites();
+	public List<Flavor> getFavoritesByAccountId(long accountId) {
+		return this.get(accountId).getFavorites();
 	}
 	
 	public Account addToFavorites(long accountId, long flavorId) {
-		Account account = this.getById(accountId);
+		Account account = this.get(accountId);
 		
 		if(verifyFlavorOccurrence(account.getFavorites(), flavorId)) {
 			throw new BadRequestException("Sabor já está na lista de favoritos");
 		}
 		
-		Flavor flavor = flavorService.getById(flavorId);
+		Flavor flavor = flavorService.get(flavorId);
 		
 		account.getFavorites().add(flavor);
 		
-		this.dao.updateAccount(account);
+		this.dao.merge(account);
 		
 		return account;
 	}
 	
 	public Account removeFavorite(long accountId, long flavorId) {
-		Account account = this.getById(accountId);
+		Account account = this.get(accountId);
 		
 		if(!verifyFlavorOccurrence(account.getFavorites(), flavorId)) {
 			throw new BadRequestException("Sabor não está na lista de favoritos");
 		}
 		
-		Flavor flavor = flavorService.getById(flavorId);
+		Flavor flavor = flavorService.get(flavorId);
 		
 		account.getFavorites().remove(flavor);
 		
-		this.dao.updateAccount(account);
+		this.dao.merge(account);
 		
 		return account;
 	}
 	
-	public void createAccount(SystemUser systemUser) {
+	public void create(SystemUser systemUser) {
 		Account account = new Account();
 		account.setSystemUser(systemUser);
 		
-		this.dao.save(account);
+		this.dao.persist(account);
 	}
 	
 	@Transactional(readOnly = true)
-	private Account getById(long accountId) {
-		List<Account> list = dao.getById(accountId);
+	private Account get(long accountId) {
+		List<Account> list = dao.find(accountId);
 		
 		if(list.size() > 0)
 			return list.get(0);

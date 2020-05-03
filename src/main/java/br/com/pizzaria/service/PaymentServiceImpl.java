@@ -69,7 +69,7 @@ public class PaymentServiceImpl implements PaymentService{
 		order.setTransactionId(JsonUtil.getJsonValue(transactionResponse, "tid"));
 		order.setTransactionStatus(JsonUtil.getJsonValue(transactionResponse, "status"));
 		
-		this.service.createOrder(order);
+		this.service.create(order);
 	}
 	
 	private CustomizedTransactionResponse getCustomizedTransactionResponse(String transactionResponse) {

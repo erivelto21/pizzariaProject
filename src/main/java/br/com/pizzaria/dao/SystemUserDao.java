@@ -7,21 +7,21 @@ import br.com.pizzaria.domain.SystemUser;
 
 public interface SystemUserDao {
 
-	List<SystemUser> getSystemUser(long id);
+	List<SystemUser> find(long id);
 	
-	List<SystemUser> getSystemUser(SystemUser user);
+	List<SystemUser> find(SystemUser user);
 
-	List<SystemUser> getSystemUser(String email);
+	List<SystemUser> find(String email);
 
-	SystemUser save(SystemUser user);
+	SystemUser persist(SystemUser user);
 
-	void updateSystemUser(SystemUser user);
+	void update(SystemUser user);
 
-	Address get(long id);
+	Address findAddress(long id);
 
-	Address saveAddress(Address address);
+	Address persistAddress(Address address);
 
 	void updateAddress(Address address);
 
-	String getPhone(long id);
+	String findPhoneByUserId(long id);
 }

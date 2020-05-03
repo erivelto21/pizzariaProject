@@ -15,13 +15,13 @@ public class FlavorDaoImpl implements FlavorDao{
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	public List<Flavor> getAllFlavors() {
+	public List<Flavor> findAllFlavors() {
 		return this.entityManager
 				.createQuery("select f from Flavor f", Flavor.class)
 				.getResultList();
 	}
 
-	public List<Flavor> getById(long id) {
+	public List<Flavor> find(long id) {
 		return this.entityManager
 				.createQuery("select f from Flavor f where f.id = :id", Flavor.class)
 				.setParameter("id", id)

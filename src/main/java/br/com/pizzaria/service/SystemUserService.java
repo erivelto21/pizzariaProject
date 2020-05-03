@@ -5,11 +5,11 @@ import br.com.pizzaria.domain.SystemUser;
 
 public interface SystemUserService {
 	
-	SystemUser getSystemUser(long id);
+	SystemUser get(long id);
 	
-	SystemUser getSystemUser(SystemUser user);
+	SystemUser get(SystemUser user);
 	
-	SystemUser getSystemUser(String email);
+	SystemUser get(String email);
 	
 	SystemUser save(SystemUser user);
 	

@@ -6,5 +6,5 @@ import br.com.pizzaria.domain.RankItem;
 
 public interface PizzaDao {
 
-	public List<RankItem> getPizzaRank();
+	public List<RankItem> findPizzaRank();
 }

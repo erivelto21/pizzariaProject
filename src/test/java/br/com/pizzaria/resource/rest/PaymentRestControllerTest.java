@@ -58,7 +58,7 @@ public class PaymentRestControllerTest {
 
 	@Test
 	public void testCreateNewCreditCardPaidPayment() throws Exception {
-		SystemUser user = this.service.getSystemUser("adm@email.com");
+		SystemUser user = this.service.get("adm@email.com");
 
 		CreditCard credit = new CreditCard();
 		credit.setCardCvv(123);
@@ -144,7 +144,7 @@ public class PaymentRestControllerTest {
 
 	@Test
 	public void testCreateNewCreditCardPaidPaymentWithAdditionals() throws Exception {
-		SystemUser user = this.service.getSystemUser("adm@email.com");
+		SystemUser user = this.service.get("adm@email.com");
 
 		CreditCard credit = new CreditCard();
 		credit.setCardCvv(123);
@@ -224,7 +224,7 @@ public class PaymentRestControllerTest {
 	
 	@Test
 	public void testCreateNewCreditCardRefusedPayment() throws Exception {
-		SystemUser user = this.service.getSystemUser("adm@email.com");
+		SystemUser user = this.service.get("adm@email.com");
 
 		CreditCard credit = new CreditCard();
 		credit.setCardCvv(123);
@@ -308,7 +308,7 @@ public class PaymentRestControllerTest {
 
 	@Test
 	public void testInvalideNewCreditCardPayment() throws Exception {
-		SystemUser user = this.service.getSystemUser("adm@email.com");
+		SystemUser user = this.service.get("adm@email.com");
 
 		CreditCard credit = new CreditCard();
 		credit.setCardCvv(123);

@@ -8,15 +8,15 @@ import br.com.pizzaria.domain.SystemUser;
 
 public interface AccountService {
 
-	Account getByUser(long userId);
+	Account getBySystemUser(long userId);
 	
-	Account getByUserEmail(String email);
+	Account getBySystemUserEmail(String email);
 	
-	List<Flavor> getFavoritesById(long accountId);
+	List<Flavor> getFavoritesByAccountId(long accountId);
 	
 	Account addToFavorites(long accountId, long flavorId);
 	
 	Account removeFavorite(long accountId, long flavorId);
 	
-	void createAccount(SystemUser systemUser);
+	void create(SystemUser systemUser);
 }

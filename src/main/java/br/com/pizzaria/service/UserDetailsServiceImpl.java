@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		SystemUser user = service.getSystemUser(email);
+		SystemUser user = service.get(email);
 		UserDetails userDetails = null;
 
 		if (user == null) {

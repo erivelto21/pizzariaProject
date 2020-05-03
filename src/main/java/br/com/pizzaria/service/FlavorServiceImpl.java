@@ -20,12 +20,12 @@ public class FlavorServiceImpl implements FlavorService{
 	
 	@Transactional(readOnly = true)
 	public List<Flavor> getAllFlavorsList() {
-		return dao.getAllFlavors();
+		return dao.findAllFlavors();
 	}
 
 	@Transactional(readOnly = true)
-	public Flavor getById(long id) {
-		List<Flavor> list = dao.getById(id);
+	public Flavor get(long id) {
+		List<Flavor> list = dao.find(id);
 		
 		if(list.size() > 0)
 			return list.get(0);

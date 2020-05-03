@@ -6,7 +6,7 @@ import br.com.pizzaria.domain.Flavor;
 
 public interface FlavorDao {
 	
-	List<Flavor> getAllFlavors();
+	List<Flavor> findAllFlavors();
 	
-	List<Flavor> getById(long id);
+	List<Flavor> find(long id);
 }

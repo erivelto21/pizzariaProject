@@ -30,6 +30,6 @@ public class OrderRestController {
 	@GetMapping(value="/user/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Order> getAllByUser(@PathVariable("id") long id) {
-		return this.service.getAllByUser(id);
+		return this.service.getAllBySystemUserId(id);
 	}
 }

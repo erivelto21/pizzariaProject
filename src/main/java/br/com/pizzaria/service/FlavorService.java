@@ -8,5 +8,5 @@ public interface FlavorService {
 	
 	List<Flavor> getAllFlavorsList();
 	
-	Flavor getById(long id);
+	Flavor get(long id);
 }

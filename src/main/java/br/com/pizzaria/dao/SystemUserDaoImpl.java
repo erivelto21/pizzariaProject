@@ -16,38 +16,38 @@ public class SystemUserDaoImpl implements SystemUserDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public List<SystemUser> getSystemUser(long id) {
+	public List<SystemUser> find(long id) {
 		return this.entityManager.createQuery("select u from SystemUser u where u.id = :id", SystemUser.class)
 				.setParameter("id", id).getResultList();
 	}
 	
-	public List<SystemUser> getSystemUser(SystemUser user) {
+	public List<SystemUser> find(SystemUser user) {
 		return this.entityManager
 				.createQuery("select u from SystemUser u where u.email = :email and u.password = :password",
 						SystemUser.class)
 				.setParameter("email", user.getEmail()).setParameter("password", user.getPassword()).getResultList();
 	}
 
-	public List<SystemUser> getSystemUser(String email) {
+	public List<SystemUser> find(String email) {
 		return this.entityManager.createQuery("select u from SystemUser u where u.email = :email", SystemUser.class)
 				.setParameter("email", email).getResultList();
 	}
 
-	public SystemUser save(SystemUser user) {
+	public SystemUser persist(SystemUser user) {
 		this.entityManager.persist(user);
 		return user;
 	}
 
-	public void updateSystemUser(SystemUser user) {
+	public void update(SystemUser user) {
 		this.entityManager.merge(user);
 	}
 
-	public Address get(long id) {
+	public Address findAddress(long id) {
 		return this.entityManager.createQuery("select a from Address a where a.id = :id", Address.class)
 				.setParameter("id", id).getSingleResult();
 	}
 
-	public Address saveAddress(Address address) {
+	public Address persistAddress(Address address) {
 		this.entityManager.persist(address);
 		return address;
 	}
@@ -56,7 +56,7 @@ public class SystemUserDaoImpl implements SystemUserDao {
 		this.entityManager.merge(address);
 	}
 
-	public String getPhone(long id) {
+	public String findPhoneByUserId(long id) {
 		return this.entityManager.createQuery("select u.phone from SystemUser u where u.id = :id", String.class)
 				.setParameter("id", id).getSingleResult();
 	}

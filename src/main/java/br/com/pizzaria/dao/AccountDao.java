@@ -6,13 +6,13 @@ import br.com.pizzaria.domain.Account;
 
 public interface AccountDao {
 
-	List<Account> getByUser(long userId);
+	List<Account> findBySystemUserId(long userId);
 	
-	List<Account> getByUserEmail(String email);
+	List<Account> findBySystemUserEmail(String email);
 
-	List<Account> getById(long accountId);
+	List<Account> find(long accountId);
 	
-	void save(Account account);
+	void persist(Account account);
 	
-	void updateAccount(Account account);
+	void merge(Account account);
 }

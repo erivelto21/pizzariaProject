@@ -6,9 +6,9 @@ import br.com.pizzaria.domain.Order;
 
 public interface OrderDao {
 
-	void save(Order order);
+	void persist(Order order);
 	
-	List<Order> get(long id);
+	List<Order> find(long id);
 	
-	List<Order> getByUser(long id);
+	List<Order> findBySystemUserId(long id);
 }

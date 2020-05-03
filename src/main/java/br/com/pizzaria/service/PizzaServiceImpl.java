@@ -18,6 +18,6 @@ public class PizzaServiceImpl implements PizzaService{
 	
 	@Transactional(readOnly = true)
 	public List<RankItem> getPizzaRank(){
-		return dao.getPizzaRank();
+		return dao.findPizzaRank();
 	}
 }

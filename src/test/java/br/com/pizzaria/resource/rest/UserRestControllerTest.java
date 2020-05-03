@@ -58,7 +58,7 @@ public class UserRestControllerTest {
 		a.setState("testx");
 		a.setStreet("testx");
 		
-		SystemUser user = this.service.getSystemUser("tet@email.com");
+		SystemUser user = this.service.get("tet@email.com");
 		user.setAddress(a);
 		
 		String u = JsonUtil.objectToJson(user);
@@ -70,7 +70,7 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testCreateANewPhone() throws Exception {
-		SystemUser user = this.service.getSystemUser("tet@email.com");
+		SystemUser user = this.service.get("tet@email.com");
 		user.setPhone("(31) 3333-3131");
 		String u = JsonUtil.objectToJson(user);
 		
@@ -150,7 +150,7 @@ public class UserRestControllerTest {
 		a.setState("qq");
 		a.setStreet("testx");
 		
-		SystemUser user = this.service.getSystemUser("tet@email.com");
+		SystemUser user = this.service.get("tet@email.com");
 		user.setAddress(a);
 		
 		String u = JsonUtil.objectToJson(user);
@@ -162,7 +162,7 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testInvalidPhone() throws Exception {
-		SystemUser user = this.service.getSystemUser("tet@email.com");
+		SystemUser user = this.service.get("tet@email.com");
 		user.setPhone("(85) q3434-2799");
 		
 		String u = JsonUtil.objectToJson(user);
@@ -174,7 +174,7 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testInvalidUserPassword() throws Exception {
-		SystemUser user = this.service.getSystemUser(10L);
+		SystemUser user = this.service.get(10L);
 		
 		user.setPassword("123");
 
@@ -188,7 +188,7 @@ public class UserRestControllerTest {
 	public void testNullNewAddress() throws Exception {
 		Address a = null;
 		
-		SystemUser user = this.service.getSystemUser("tet@email.com");
+		SystemUser user = this.service.get("tet@email.com");
 		user.setAddress(a);
 		
 		String u = JsonUtil.objectToJson(user);
@@ -200,7 +200,7 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testNullNewPhone() throws Exception {
-		SystemUser user = this.service.getSystemUser("tet@email.com");
+		SystemUser user = this.service.get("tet@email.com");
 		user.setPhone("");
 		String u = JsonUtil.objectToJson(user);
 		
@@ -230,7 +230,7 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testUpdateUserPassword() throws Exception {
-		SystemUser user = this.service.getSystemUser(10L);
+		SystemUser user = this.service.get(10L);
 		
 		user.setPassword("12345678");
 
@@ -239,5 +239,4 @@ public class UserRestControllerTest {
 						.contentType(MediaType.APPLICATION_JSON_VALUE).content(user.getPassword()))
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
-	
 }

@@ -31,8 +31,8 @@ public class SystemUserServiceImpl implements SystemUserService {
 	private PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
-	public SystemUser getSystemUser(long id) {
-		List<SystemUser> list = this.dao.getSystemUser(id);
+	public SystemUser get(long id) {
+		List<SystemUser> list = this.dao.find(id);
 		
 		if(list.size() > 0)
 			return list.get(0);
@@ -41,8 +41,8 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 	
 	@Transactional(readOnly = true)
-	public SystemUser getSystemUser(SystemUser user) {
-		List<SystemUser> list = dao.getSystemUser(user);
+	public SystemUser get(SystemUser user) {
+		List<SystemUser> list = dao.find(user);
 
 		if (list.size() > 0)
 			return list.get(0);
@@ -51,8 +51,8 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 
 	@Transactional(readOnly = true)
-	public SystemUser getSystemUser(String email) {
-		List<SystemUser> list = this.dao.getSystemUser(email);
+	public SystemUser get(String email) {
+		List<SystemUser> list = this.dao.find(email);
 
 		return list.size() > 0 ? list.get(0) : null;
 	}
@@ -63,9 +63,9 @@ public class SystemUserServiceImpl implements SystemUserService {
 
 		user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 		
-		SystemUser systemUser = dao.save(user);
+		SystemUser systemUser = dao.persist(user);
 		
-		accountService.createAccount(systemUser);
+		accountService.create(systemUser);
 		
 		return systemUser;
 	}
@@ -74,7 +74,7 @@ public class SystemUserServiceImpl implements SystemUserService {
 		if(!SystemUserValidation.passwordIsValid(password))
 			throw new SystemUserInvalidException("Senha inválida");
 		
-		SystemUser systemUser = this.getSystemUser(systemUserId);
+		SystemUser systemUser = this.get(systemUserId);
 		
 		if(this.passwordIsEqual(password, systemUser.getPassword()))
 			throw new EqualPasswordException("Nova senha é igual a antiga");
@@ -89,24 +89,24 @@ public class SystemUserServiceImpl implements SystemUserService {
 	public void addressManagement(Address address, long systemUserId) {
 		SystemUserValidation.addressIsValid(address);
 
-		SystemUser systemUser = this.getSystemUser(systemUserId);
+		SystemUser systemUser = this.get(systemUserId);
 
 		if (systemUser.getAddress() == null) {
-			systemUser.setAddress(this.dao.saveAddress(address));
-			this.dao.updateSystemUser(systemUser);
+			systemUser.setAddress(this.dao.persistAddress(address));
+			this.dao.update(systemUser);
 		} else {
 			this.updateAddress(systemUser, address);
 		}
 	}
 	
 	public void phoneManagement(String phone, long systemUserId) {
-		SystemUser systemUser = this.getSystemUser(systemUserId);
+		SystemUser systemUser = this.get(systemUserId);
 
 		SystemUserValidation.phoneIsValid(phone);
 		
 		if(systemUser.getPhone() == null) {
 			systemUser.setPhone(phone);
-			this.dao.updateSystemUser(systemUser);
+			this.dao.update(systemUser);
 		} else {
 			this.updatePhone(systemUser, phone);
 		}
@@ -117,12 +117,12 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 
 	private void updatePassword(SystemUser systemUser) {
-		this.dao.updateSystemUser(systemUser);
+		this.dao.update(systemUser);
 	}
 	
 	private void updatePhone(SystemUser systemUser, String phone) {
 		if (!systemUser.getPhone().equals(phone))
-			this.dao.updateSystemUser(systemUser);
+			this.dao.update(systemUser);
 	}
 
 	private void updateAddress(SystemUser systemUser, Address address) {
@@ -131,7 +131,7 @@ public class SystemUserServiceImpl implements SystemUserService {
 	}
 
 	private void emailIsNotUsed(String email) {
-		if (getSystemUser(email) == null)
+		if (get(email) == null)
 			return;
 		throw new EmailExistException("Email já em uso");
 	}

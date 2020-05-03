@@ -18,7 +18,7 @@ public class PizzaDaoImpl implements PizzaDao{
 	private EntityManager entityManager;
 	
 	
-	public List<RankItem> getPizzaRank() {
+	public List<RankItem> findPizzaRank() {
 		return castList(RankItem.class, this.entityManager.createNamedQuery("RankItem").getResultList());
 	}
 	
