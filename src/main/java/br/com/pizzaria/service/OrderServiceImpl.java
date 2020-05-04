@@ -18,9 +18,6 @@ public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private OrderDao dao;
 	
-	@Autowired
-	private SystemUserService service; 
-	
 	public void create(Order order) {
 		this.dao.persist(order);
 	}
@@ -39,12 +36,9 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> getAllBySystemUserId(long id) {
 		List<Order> list = this.dao.findBySystemUserId(id);
 		
-		systemUserExist(id);
-		
-		return list;
-	}
-	
-	private void systemUserExist(long id) {
-		this.service.get(id);
+		if (list.size() > 0)
+			return list;
+
+		throw new NoResultException("Usuário não possui pedidos");
 	}
 }
