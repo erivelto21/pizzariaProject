@@ -22,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.pizzaria.config.Application;
+import br.com.pizzaria.domain.Account;
 import br.com.pizzaria.domain.Flavor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,8 +45,12 @@ public class AccountRestControllerTest {
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch("/account/favorite/add/1/flavor/1").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 					.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
 
-		System.out.println(result.getResponse().getContentAsString());
+		Account account = objectMapper.readValue(result.getResponse().getContentAsString(), Account.class);
+
+		assertTrue(account.getFavorites().size() > 0);
 	}
 	
 	@Test
@@ -60,18 +65,12 @@ public class AccountRestControllerTest {
 				objectMapper.getTypeFactory().constructCollectionType(List.class, Flavor.class));
 		
 		assertTrue(list.size() > 0);
-		
-		for (Flavor flavor : list) {
-			System.out.println(flavor.getName());
-		}
 	}
 	
 	@Test
 	public void testRemoveFavoriteFlavor() throws Exception {
-		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch("/account/favorite/remove/1/flavor/3").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(MockMvcRequestBuilders.patch("/account/favorite/remove/1/flavor/1").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
-					.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
-
-		System.out.println(result.getResponse().getContentAsString());
+					.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 }

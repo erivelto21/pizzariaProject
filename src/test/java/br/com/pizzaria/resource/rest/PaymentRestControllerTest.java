@@ -382,6 +382,6 @@ public class PaymentRestControllerTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/payment/creditcard").contentType(MediaType.APPLICATION_JSON_VALUE).content(c))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 }

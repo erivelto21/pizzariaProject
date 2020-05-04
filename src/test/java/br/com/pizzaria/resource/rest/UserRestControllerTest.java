@@ -51,32 +51,27 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testCreateANewAddress() throws Exception {
-		Address a = new Address();
-		a.setCity("Testx");
-		a.setNeighborhood("testx");
-		a.setNumber(1);
-		a.setState("testx");
-		a.setStreet("testx");
+		Address address = new Address();
+		address.setCity("Testx");
+		address.setNeighborhood("testx");
+		address.setNumber(1);
+		address.setState("testx");
+		address.setStreet("testx");
 		
-		SystemUser user = this.service.get("tet@email.com");
-		user.setAddress(a);
-		
-		String u = JsonUtil.objectToJson(user);
+		String a = JsonUtil.objectToJson(address);
 		
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isNoContent()).andReturn();
+		.perform(MockMvcRequestBuilders.patch("/user/10/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(a))
+		.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
 	public void testCreateANewPhone() throws Exception {
-		SystemUser user = this.service.get("tet@email.com");
-		user.setPhone("(31) 3333-3131");
-		String u = JsonUtil.objectToJson(user);
+		String phone = "(31) 3333-3131";
 		
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isNoContent()).andReturn();
+		.perform(MockMvcRequestBuilders.patch("/user/1/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(phone))
+		.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
@@ -88,7 +83,7 @@ public class UserRestControllerTest {
 		user.setRole(role);
 		user.setFirstName("test");
 		user.setLastName("1");
-		user.setEmail("tet2@email.com");
+		user.setEmail("tet4@email.com");
 		user.setPassword("test@email.com");
 
 		String u = JsonUtil.objectToJson(user);
@@ -119,7 +114,7 @@ public class UserRestControllerTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
@@ -138,38 +133,32 @@ public class UserRestControllerTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
 	public void testInvalidAddress() throws Exception {
-		Address a = new Address();
-		a.setCity("Testx");
-		a.setNeighborhood("testx");
-		a.setNumber(0);
-		a.setState("qq");
-		a.setStreet("testx");
+		Address address = new Address();
+		address.setCity("Testx");
+		address.setNeighborhood("testx");
+		address.setNumber(0);
+		address.setState("qq");
+		address.setStreet("testx");
 		
-		SystemUser user = this.service.get("tet@email.com");
-		user.setAddress(a);
-		
-		String u = JsonUtil.objectToJson(user);
+		String a = JsonUtil.objectToJson(address);
 		
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+		.perform(MockMvcRequestBuilders.patch("/user/10/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(a))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
 	public void testInvalidPhone() throws Exception {
-		SystemUser user = this.service.get("tet@email.com");
-		user.setPhone("(85) q3434-2799");
-		
-		String u = JsonUtil.objectToJson(user);
+		String phone = "(85) q3434-2799";
 		
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+		.perform(MockMvcRequestBuilders.patch("/user/10/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(phone))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
@@ -186,27 +175,22 @@ public class UserRestControllerTest {
 	
 	@Test
 	public void testNullNewAddress() throws Exception {
-		Address a = null;
-		
-		SystemUser user = this.service.get("tet@email.com");
-		user.setAddress(a);
-		
-		String u = JsonUtil.objectToJson(user);
+		Address address = null;
+
+		String a = JsonUtil.objectToJson(address);
 		
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+		.perform(MockMvcRequestBuilders.patch("/user/1/address").contentType(MediaType.APPLICATION_JSON_VALUE).content(a))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
 	public void testNullNewPhone() throws Exception {
-		SystemUser user = this.service.get("tet@email.com");
-		user.setPhone("");
-		String u = JsonUtil.objectToJson(user);
+		String phone = "";
 		
 		this.mockMvc
-		.perform(MockMvcRequestBuilders.put("/user/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-		.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+		.perform(MockMvcRequestBuilders.patch("/user/10/phone").contentType(MediaType.APPLICATION_JSON_VALUE).content(phone))
+		.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
@@ -225,14 +209,14 @@ public class UserRestControllerTest {
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.post("/user").contentType(MediaType.APPLICATION_JSON_VALUE).content(u))
-				.andExpect(MockMvcResultMatchers.status().isBadRequest()).andReturn();
+				.andExpect(MockMvcResultMatchers.status().isBadRequest());
 	}
 	
 	@Test
 	public void testUpdateUserPassword() throws Exception {
 		SystemUser user = this.service.get(10L);
 		
-		user.setPassword("12345678");
+		user.setPassword("123456781");
 
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.patch("/user/" + user.getId() + "/password")

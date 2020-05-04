@@ -48,11 +48,12 @@ public class PizzaRestControllerTest {
 				.perform(MockMvcRequestBuilders.get("/pizza").contentType(MediaType.APPLICATION_JSON)
 						.accept(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+		
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		List<Flavor> list = objectMapper.readValue(result.getResponse().getContentAsString(),
 				objectMapper.getTypeFactory().constructCollectionType(List.class, RankItem.class));
-		System.out.println(result.getResponse().getContentAsString());
+
 		assertTrue(list.size() > 0);
 	}
 }
