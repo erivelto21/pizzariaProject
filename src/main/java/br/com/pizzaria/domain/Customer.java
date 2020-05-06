@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import br.com.pizzaria.exception.CustomerInvalidException;
-
 public class Customer {
 	
 	@JsonProperty(value = "user")
@@ -17,6 +15,8 @@ public class Customer {
 	private List<Pizza> cart;
 	
 	private CreditCard creditCard;
+	
+	private BigDecimal amount;
 	
 	public SystemUser getSystemUser() {
 		return systemUser;
@@ -51,19 +51,10 @@ public class Customer {
 	}
 
 	public BigDecimal getAmount() {
-		if(this.cart == null)
-			throw new CustomerInvalidException("Carrinho vazio");
-
-		BigDecimal amount = new BigDecimal("00.00");
-
-		for(Pizza orderedPizza: this.cart) {
-			orderedPizza.calculateAdditionals();
-			int aux = orderedPizza.getAmount();
-			amount = amount
-					.add(orderedPizza.calculatePrizePerSize().add(orderedPizza.getAdditionalsValue())
-					.multiply(new BigDecimal(aux)));
-		}
-
 		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 }

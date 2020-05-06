@@ -3,6 +3,7 @@ package br.com.pizzaria.resource.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,11 @@ public class PaymentRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CustomizedTransactionResponse creditCardPayment(@RequestBody Customer customer) {
 		return this.service.creditCardPayment(customer);
+	}
+	
+	@PostMapping(value="/creditcard/{discountCode}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public CustomizedTransactionResponse creditCardPayment(@RequestBody Customer customer, @PathVariable("discountCode") String discountCode) {
+		return this.service.creditCardPaymentWithDiscount(customer, discountCode);
 	}
 }

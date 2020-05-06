@@ -6,4 +6,6 @@ import br.com.pizzaria.domain.CustomizedTransactionResponse;
 public interface PaymentService {
 	
 	CustomizedTransactionResponse creditCardPayment(Customer customer);
+	
+	CustomizedTransactionResponse creditCardPaymentWithDiscount(Customer customer, String discountCode);
 }
