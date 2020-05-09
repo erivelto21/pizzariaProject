@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	public void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable().authorizeRequests()
+		httpSecurity.csrf().disable().authorizeRequests()
 				.antMatchers("/oauth/token").permitAll()
 				.antMatchers("/flavor").permitAll()
 				.antMatchers("/pizza").permitAll()
