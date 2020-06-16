@@ -16,10 +16,11 @@ import javax.persistence.SqlResultSetMapping;
 		@FieldResult(name = "name", column = "name"),
 		@FieldResult(name = "type", column = "type"),
 		@FieldResult(name = "price", column = "price"),
+		@FieldResult(name = "image", column = "image"),
 		@FieldResult(name = "amount", column = "amount") }))
 @NamedNativeQuery(
 		  name = "RankItem",
-		  query = "SELECT  f.name, f.type, f.price, sum(amount) as amount FROM pizza as p JOIN custom_flavor as f ON p.custom_flavor_id = f.id group by f.name, f.type, f.price, amount order by amount desc",
+		  query = "SELECT  f.name, f.type, f.price, f.image, sum(amount) as amount FROM pizza as p JOIN custom_flavor as f ON p.custom_flavor_id = f.id group by f.name, f.type, f.price, f.image, amount order by amount desc",
 		  resultSetMapping = "RankItemMapping")
 @Entity
 public class RankItem {
@@ -28,6 +29,8 @@ public class RankItem {
 	private String name;
 
 	private BigDecimal price;
+	
+	private String image;
 
 	@Enumerated(EnumType.STRING)
 	private Type type;
@@ -44,6 +47,14 @@ public class RankItem {
 
 	public BigDecimal getPrice() {
 		return price;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public void setPrice(BigDecimal price) {
