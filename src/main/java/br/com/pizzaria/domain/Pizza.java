@@ -153,7 +153,8 @@ public class Pizza {
 		BigDecimal total = new BigDecimal("00.00");
 		
 		for(CustomIngredient i : this.customFlavor.getIngredients()) {
-			total = total.add(this.calculateIngredientAdditional(i));
+			if(i.getAmount() > 0)
+				total = total.add(this.calculateIngredientAdditional(i));
 		}
 
 		return total;
