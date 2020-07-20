@@ -30,5 +30,3 @@
     <li>/order/user/{id} - METHOD GET - Request Body Parameter: none - this endpoint searches an order by its system user id.</li>
     <li>/payment/creditcard - METHOD POST - Request Body Parameter: Customer object - this endpoint makes a payment with a credit card.</li>
   </ul>
-  <h6>My API is deployed on heroku if you wanna give a try the url is below: </h6>
-  <p>https://app-pizzaria-rest.herokuapp.com<p>
